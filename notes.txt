@@ -1,0 +1,20 @@
+Anaconda: Distribution of Python
+-- has many Python libraries inside
+
+Jupyter
+-- IDE for Data Science
+
+Code in this Udemy Course works in any IDE, not just Jupyter
+
+Steps for Running "Anaconda Navigator"
+Note: Because "Anaconda" installer only works for Mac with an Apple chip (I have a Mac with an Intel chip), I had to download Miniconda, then since the Python version was a mismatch, I had to open a new environment with the correct Python version and install Anaconda in there. So, to run Anaconda and Anaconda Navigator etc., I need to open that environment first.
+>> conda activate navigator
+>> anaconda-navigator
+
+Steps for Running "Jupyter"
+1. Do all steps for running "Anaconda Navigator"
+2. Then, click "Launch" for Jupyter in the UI
+3. To see Jupyter, open the following link in the browser
+>> http://localhost:8888/tree
+
+
