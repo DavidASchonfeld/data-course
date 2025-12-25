@@ -1,0 +1,7 @@
+Virtual Environments
+-- Imaginary containers: In each container, you can run a different version of a software
+-- For example, you can run Python 3.7 in 1 virtual environment, and it won't affect things if you run Python 3.8 in a different virtual environment (or even outside of your virtual environment on your computer).
+-- It's helpful if you have code that works in a specific version, and when the new version comes out, your new code might not work with the new version. Until you find the issues with the code to update to work with the new version, it's helpful for it to still work in the old version until you're ready to upgrade to the new version.
+-- Anaconda has its own built-in virtual environment manager
+
+-- More Info: conda.pydata.org/docs/using/envs.html#create-an-environment
