@@ -19,3 +19,5 @@ Steps for Running "Jupyter"
 OR
 >> conda activate navigator (enter the environment named "navigator" (I chose that name))
 >> jupyter lab (it opens this url: "http://localhost:8890/lab")
+
+-- Note: If Jupyter doesn't work on my Mac, use "Google Colab". So far, Jupyter works on my Mac, so I haven't tried "Google Colab", but this is good to know.
