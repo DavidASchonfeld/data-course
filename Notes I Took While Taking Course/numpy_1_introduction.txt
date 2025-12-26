@@ -84,11 +84,4 @@ randint(2,10)
 I knew that already.
 
 
-NumpPy Indexing and Selection
-
-import numpy as np
-arr = np.arange(0,11)  # This goes from 0 to 10 (since it excludes 11)
-
-
-
 
