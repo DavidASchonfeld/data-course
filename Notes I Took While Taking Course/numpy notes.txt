@@ -1,0 +1,94 @@
+Introduction to NumPy
+
+Numpy Arrays:
+- 2 Types 
+-- Vectors = 1-D Arrays
+-- Martix/Matrices = 2-D (yes, A matrix can have 1 row or 1 column)
+
+
+
+my_list = [1,2,3] # Python List
+import nump as np
+arr = np.array(my_list)
+arr  # prints out the array
+
+my_matrix = [[1,2,3],[4,5,6],[7,8,9]]
+np.array(my_mat)  #Casts Python's "List of Lists" to a numpy array
+becomes:
+
+2 brackets so 2-Dimenstiaonl
+3 brackets would be 3-Dimensional
+array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+
+np.arange(0,5)  #(Start, Excluding End Number, Optional: Step Size, Default = 1)
+array([0, 1, 2, 3, 4])
+
+np.zeros(3)
+array([ 0., 0., 0.])
+np.zeros((2,3)) # <- np.zeros((rows, columns))
+#Note: here, I'm passing in a tuple to represent the rows, columns
+array([[0., 0., 0.],
+       [0., 0., 0.]])
+
+np.ones(4)
+array([ 1., 1., 1., 1.])
+
+Lin Space: 
+
+np.linspace(0, 5, 10) #< -np.linspace(start, stop, How many numbers do we want.) Creates an array 
+
+
+np.range <-3rd parameter is last number you want (excluding that last number)
+np.linspace <-3rd paraemter: Number of Spaces I want
+
+np.eye(4)  #<- Creates an Identity Matrix, All zeroes except 1s in the diagonal from top left ot bottom right. These are always square matrices
+
+np.random.rand()    #<-Create a random array, based on the matrix rowsXColumns you put in. Default Values: Between 0 and 1
+
+np.random.rand(5)  -> becomes random 1 dimenstiaonl
+np.random.rand(5,5) -> becomes random 2 dimenstiaonl
+
+np.random.randn(2)  -> the randN means it the random numbers are between -1 and 1
+np.random.randn(3,)
+
+np.random.randint(1, 100)   -> randoms Values: int between 1 and 100 (excluding the last number 100)
+
+np.random.randint(1,100,10) ->get 10 random interegers between 1, 100 (including 1, excluding 100)
+
+arr = np.arange(25)
+randomArr = np.random.randint(0,50,10)  # Get 10 integers,randomly between 0 and 50 (including possiblity of 0, excluding 50)
+Now that randomArr is full of those random values
+
+arr.reshape(5,5)  # Fills numbers from old array to new array. You need to be able to fit all numbers from old array to new array or it will throw an error.
+Since arr has 25 slots, a 5x5 (= 25) matrix has 25 slots so it works
+
+arr.shape: gets shape of array.
+arr.shape returns (25,))
+For example (25,) means 1 dimensional array 25 numbers long
+(5,5) output is a 5x5 matrix
+
+arr.dtype () returns datatype (aka data type for the slots in the array)
+Ex Output: dtype('int32')
+
+ranarr.max() -> gets max value in the array: Ex: 49
+ranarr.min() -> gets min value in the array: #x:3
+
+ranarr.argmax() -> gets index location of the max value
+ranarr.argmin() -> gets index location of the min value
+
+Instead of np.random.randint
+from numpy.random import randint
+randint(2,10)
+I knew that already.
+
+
+NumpPy Indexing and Selection
+
+import numpy as np
+arr = np.arange(0,11)  # This goes from 0 to 10 (since it excludes 11)
+
+
+
+

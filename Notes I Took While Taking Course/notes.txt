@@ -21,3 +21,7 @@ OR
 >> jupyter lab (it opens this url: "http://localhost:8890/lab")
 
 -- Note: If Jupyter doesn't work on my Mac, use "Google Colab". So far, Jupyter works on my Mac, so I haven't tried "Google Colab", but this is good to know.
+
+To install, you can do
+-- pip install numpy <- What I usually use
+-- conda install numpy <- What I'll use in this course since I'm using Anaconda to manage these packages
