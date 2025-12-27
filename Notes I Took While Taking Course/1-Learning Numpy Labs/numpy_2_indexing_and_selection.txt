@@ -1,5 +1,9 @@
 NumpPy Indexing and Selection
 
+#  Remember, we still need to:
+import nump as np
+# to use it.
+
 # Summary: You can use Python slicing etc. on numpy arrays. And Broadcasting (Defined Below)
 # Reminders:
 # -- Python Indexing Starts at 0
@@ -90,6 +94,29 @@ arr = np.arange(0, 10)
 arrary([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 arr > 5
 array([False, False, False, False, False, False, True, True, True, True], dtype=bool)
+Let's save it
+bool_arr = arr > 5
+arr[bool_arr]: will only get the results of it being true
+array([6, 7, 8, 9, 10])
+Better in 1 step
+arr[arr>5]: Would only get all the slots where each slot value matches the value
+array([6, 7, 8, 9, 10])
+
+arr[arr<3]: Returns: array([1,2])
+
+arr_2d = np.arange(50).reshape(5,10)  # <-Get 5x10 array, counting from 0 to 49
+Practice to grab chunks from the array.
+
+arr_2d[1:3,1:4]
+
+
+
+
+
+
+
+
+
 
 
 
