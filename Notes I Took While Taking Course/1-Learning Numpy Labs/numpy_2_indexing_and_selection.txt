@@ -1,7 +1,7 @@
 NumpPy Indexing and Selection
 
 #  Remember, we still need to:
-import nump as np
+import numpy as np
 # to use it.
 
 # Summary: You can use Python slicing etc. on numpy arrays. And Broadcasting (Defined Below)
