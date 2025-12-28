@@ -5,10 +5,15 @@ Numpy Arrays:
 -- Vectors = 1-D Arrays
 -- Martix/Matrices = 2-D (yes, A matrix can have 1 row or 1 column)
 
-
+#ARange VS LinSpace:
+np.arange(InclusiveStart, ExclusiveEnd, Optional Step Size (Default = 1))
+np.linspace()
+np.linspace(InclusiveStart, InclusiveEnd, # of Numbers I Want Total aka Size of Array I Want)
+Also, if you want an array of identical numbers, you can use linspace like this. For example, for 5:
+np.linspace(5, 5, 10)  (For )
 
 my_list = [1,2,3] # Python List
-import nump as np
+import numpy as np
 arr = np.array(my_list)
 arr  # prints out the array
 

@@ -1,0 +1,126 @@
+NumpPy Indexing and Selection
+
+#  Remember, we still need to:
+import numpy as np
+# to use it.
+
+# Summary: You can use Python slicing etc. on numpy arrays. And Broadcasting (Defined Below)
+# Reminders:
+# -- Python Indexing Starts at 0
+# -- Slicing is a view to the actual array, so editing the slciing affects the original array. In order to create a new copied array, you need to use the copy function.
+# -- Python Slicing: [inclusive_start, exclusive_end]  (aka including the value at the start position, goes up to and excludes the last position)
+
+
+# Remember, indexing in Python starts at 0.
+
+import numpy as np
+arr = np.arange(inclusive_start, exclusive_end) #<-Trying to write this out for easy reading
+arr = np.arange(0,11)  # This goes from 0 to 10 (since it excludes 11)
+
+arr[8]   #<-gets value at index 8
+
+#Yes, You can use Python's Slices
+arr[inclusiveStart, exclusiveEnd]
+arr[1:5]
+# gets values at index 1 through (and excluding) index 5
+
+arr[:6] <-everything starting from (and excluding) index 6
+# Same thing as arr[0:6]
+
+## Broadcasting
+arr[0:5] = 8  # Overwrites all values in the [0:5] slice to 8
+For example, an array full of 1s (for example, let's make it 10 slots (indexes 0 through including 9)):
+arr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+becomes
+arr = [8, 8, 8, 8, 8, 1, 1, 1, 1, 1]
+
+Reminder: a slice is not a copy of an array. Just a view/window of the array.
+If you edit the slice's values, you are affecting the actual array.
+
+To make a copy of an array
+arr_copy = arrayName.copy()
+
+######
+
+import nump as np
+arr_2d = np.array([[5, 10, 15], [20, 25, 30], [35, 40, 45]])
+array([[ 5, 10, 15],
+       [20, 25, 30],
+       [35, 40, 45]])
+
+# Formats for Getting Values:
+We want to get the 5 digit. It's at the 1st row, 1st column. (index 0, 0)
+arr_2d[row][column]
+arr_2d[0][0]
+arr_2d[0] gets the whole row at index 0: [5, 10, 15]
+arr_2d[0][0] gets the 5 digit
+
+More Examples:
+arr_2d[0][1] would get 10
+arr_2d[1][1] = 25
+arr_2d[2][0] = 35
+arr_2d[2][1] = 40
+etc.
+
+Another Way of Getting Values:
+
+Below 2 lines are NOT lines of code. tHey're shorter notation of me writing that these two ways of writing how to access a slot's value is exactly the same, does the exact same thing. 
+arr_2d[row, column] = arr_2d[row][column] <-Not a line of code
+Example: arr_2d[1, 2] = arr_2d[1][2] <-Not a line of code
+
+
+arr_2d[1, 2] would get 30
+
+You can use slice notations for the matries, and you can also use them for the commas:
+Remember, arr_2d is:
+array([[ 5, 10, 15],
+       [20, 25, 30],
+       [35, 40, 45]])
+
+arr_2d[:2,1:]
+array([[10, 15],
+        25, 30]])
+# Description:
+# Gets all slots in the rows up to and excluding the last row, then only the slots starting with the 1st index (python index starts at 0, so this cuts off the first number of each row) and to the end.
+So it would start with arr_2d[:2]: [5, 10, 15], [20, 25, 30], then arr_2d[:2,1:] cuts out the [5, 20] to get the result of [10, 15], [25, 30]
+
+Another Example:
+arr_2d[1:, :1]
+arr_2d[1:] is [20, 25, 30], [35, 40, 45]. Then, arr_2d[1:, :1] is: [20, 25, 30]
+(Remember :1 only includes everything UP TO 1, NOT INCLUDING 1)
+
+# Comparing Each Value in Matrices: Creating a Matrix out of Booleans
+arr = np.arange(0, 10)
+arrary([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+arr > 5
+array([False, False, False, False, False, False, True, True, True, True], dtype=bool)
+Let's save it
+bool_arr = arr > 5
+arr[bool_arr]: will only get the results of it being true
+array([6, 7, 8, 9, 10])
+Better in 1 step
+arr[arr>5]: Would only get all the slots where each slot value matches the value
+array([6, 7, 8, 9, 10])
+
+arr[arr<3]: Returns: array([1,2])
+
+arr_2d = np.arange(50).reshape(5,10)  # <-Get 5x10 array, counting from 0 to 49
+Practice to grab chunks from the array.
+
+arr_2d[1:3,1:4]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
