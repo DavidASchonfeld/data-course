@@ -1,0 +1,97 @@
+Pandas - DataFrames
+
+#####
+Lecture 1 of 3
+###
+
+
+DataFrames are just a bunch of series that share the same index
+Column (or Row) Name = Index = Key (Different ways of saving the same thing)
+
+All of the Columns are Series
+All of the Rows are Series
+
+import numpy as np
+import pandas as pd
+
+from numpy.random import randn
+
+np.random.seed(10)  # So we'll see the same random numbers that the teacher sees
+
+my_dataFrame = pd.DataFrame(randn(5,4), ['A','B','C','D'],'W','X','Y','Z')
+# pd.DataFrame(data, index_rows, index_columns)
+# Jupyter labs will print out the data in an easy-to-read way, and since we have indexes (aka labels) for rows and columns, that will all be printed out too.
+
+Let's grab the "W" column
+my_dataFrame['W']
+
+Remember, the W column is just a Pandas Series
+type(my_dataFrame['W'])  -> Returns pandas.core.series.Series
+
+type(my_dataFrame)
+pandas.core.
+
+Let's grab columns
+my_dataFrame['W'] (Technically, you could do my_dataFrame.W, but it could get confused because Pandas won't know if you are asking for a column or a method)
+IF you want a list of columns, pass in a list of column names/indexes
+
+my_dataFrame[['W','Z']] <-Remember those double brackets, since we are passing in 1 list object into that first set of brackets
+
+KeyError: Means it can't find a column when you pass in a key aka index aka column name
+
+####
+Add Columns:
+####
+To create a new column in your data frame, you can declare a new column like you would a new variable
+
+my_dataFrame['new'] = my_dataFrame['W'] + my_dataFrame['Y']
+
+
+###
+Remove Columns (by Creating a New Array)
+###
+For Rows:
+my_dataFrame.drop('rowName') <-Refers to axis=0 aka rows
+my_dataFrame.drop('rowName', axis=0) <-axis=0 is the default setting, so you don't need to specify here.
+
+For Columns
+my_dataFrame.drop('columnName',axis=1)
+
+# To make the Changes in-Place (aka actually edit the dataFrame instead of creating an edited copy):
+
+my_dataFrame.drop('columnName', axis=1, inplace=True)
+Another Example:
+my_dataFrame.drop('rowName', axis=0, inplace=True) <-Since 
+
+# Get DataFrame shape
+my_dataFrame.shape
+Returns (rows, columns) aka the (0th axis, 1st axis)
+Example Result: (5,4)  <-Returns a tuple
+
+
+# Selecting Columns
+my_dataFrame['columnName]
+my_dataFrame[['list','of','column','names']]
+
+# Selecting Rows
+my_dataFrame.loc['RowName']
+# Returns a Series.
+
+my_dataFrame.iloc[Number]  <-Numerical-Index-Based Location (Put 0, 1, 2 etc.)
+# Aka the row at index 0, or at index 1, index 2, index 3, etc.
+
+# Getting Cell Value:
+my_dataFrame.loc['rowName','columnName']
+For example:
+my_dataFrame.loc['W','R']
+
+Subset:
+my_dataFrame.loc[['A','B'],['W','Y']]
+Gets the cells at 
+      W     Y
+A    2.7   0.9
+B    0.6  -0.8
+
+
+
+
