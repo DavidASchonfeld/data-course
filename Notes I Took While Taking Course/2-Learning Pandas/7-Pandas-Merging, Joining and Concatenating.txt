@@ -1,0 +1,133 @@
+Pandas - Merging, Joining and Concatenating DataFrames
+
+import pandas as pd
+
+
+Example Tables:
+
+my_dataFrame_1:
+    A    B
+0  A0    B1
+1  A1    B2
+
+my_dataFrame_2:
+    A    B
+2   A2   B2
+3   A3   B3
+
+
+
+Concatenating
+
+-- "glues together DataFrames"
+--- Note: The DataFrame's dimensions should match on the dimension/side you are gluing together.
+--- Note: You want to make sure that the values match as you line them up (see below where the table with the "NaN"s is for an example)
+
+pd.concat([my_dataFrame_1, my_dataFrame_2, my_dataFrame_3], axis = 0)
+# Here, I'm lisitng 3, but I could use any amount of dataFrames
+# Note: axis = 0 is the default value, to concatenate these frames based on the columns
+It matches the indexes together.
+
+
+   A    B 
+0  A0   B0
+1  A1   B1
+2  A2   B2
+3  A3   B3
+
+
+If you concatenate the tables and they all have non-matching values for the row values (if you're concatenating via rows), it will be like a strange diagonal, with NaN filling in blanks, see below for an example:
+
+   A    B     A    B
+0  A0   B0   NaN  NaN
+1  A1   B2   NaN  NaN
+2  NaN  NaN  A2   B2
+3  NaN  NaN  A3   B3
+
+See how there are 2 "A" and "B" columns? (1 for each table). Since they were added via the row index value, those A1 etc. values are not lining up, with lots of empty NaN space to fill in the gaps. In the example farther above, we had lined it up based on the A/B columns so there was no empty NaN space.
+
+
+
+More Example DataFrames:
+
+left_dataFrame:
+    A    B    Key
+0   A0   B0   K0
+1   A1   B1   K1
+
+right_dataFrame:
+    C    D    Key
+0   C0   D0   K0
+1   C1   D1   K1
+
+
+Merging
+-- Merge function: similar to SQL
+pd.merge(left_dataFrame, right_dataFrame, how = 'inner', on = 'key')
+
+-- combine 2 different rows (each in a different table) based on an in-common value, usually a key
+-- Difference to Concatenate: The identical column (or row) that we are merging on (in this case, the "Key" column) will just be 1 column (or row) in the new table, since we know that it is the same value for each table (and how we are identifying how each row in each table match with each other.)
+-- the DataFrames are not just glued together. The in-common column value (in the "on = whatColumnIChoose") is just 1 new column, since that column will be the same in each combining table since we're choosing to merge the 2 tables based on that specific unique identifier.
+
+pd.merge(left_dataFrame, right_dataFrame, how = 'inner', on = 'key')
+# "inner join "is default
+Output:
+     A    B    Key   C    D
+0    A0   B0   K0    C0   D0
+1    A1   B1   K1    C1   D1
+
+
+Merging on Multiple Keys
+TODO: COME BACK TO THIS....
+pd.merge(left_dataFrame, right_dataFrame, on=['key1', 'key2'])
+
+
+
+
+
+You can also use "Outer Join" and "Right Join" (just like in SQL)
+how = 'outer'
+how = 'right'
+
+
+
+
+
+
+
+Joining
+-- Same as Merge, but your key is your index instead of your column. 
+left_dataFrame.join(right_dataFrame, how='inner')  # 'Inner Join' is the default
+
+How is Merge VS Join different?
+Merge: Use the column as the key
+Join: When you want to use the index as key
+
+
+
+#################
+Let's Venture Outside the Lecture for Clarifying Details
+#################
+
+
+Let's Compare Python Pandas to SQL (since I know SQL already)
+
+Joining
+-- same in SQL and Python Pandas
+
+Merge
+-- different definitions between SQL and Python Pandas. Definitions Below:
+-- SQL: Upsert (Update value if existing key is in the table, otherwise insert as a new row)
+-- Python Pandas: 
+
+
+Why use Join VS Merge?
+-- Join and Merge have extremely similar methods behind-the-scenes.
+-- Choosing 1 or the other is more based on those 2 different "wrapper" methods having different parameters and their paramter methods being better handled to suit different types of situations
+-- While it's better to use:
+---- Join when: Index: Use for combining based on the Index
+---- Merge when: Column or Row: Use for combining based on column or row
+-- technically, you could use Join and Merge interchangeably for most things, thought you have to be carefulto avoid errors if you use them for unintended uses. (For example, for 1 of them, you have ot write the name of an input list twice, and maybe you'll mispell one of those names, making it a highrer chance you make a mistake. etc. And to use merge as a join subsittue, you need to write extra logic to ensure that the index is not messed up.
+
+
+
