@@ -1,0 +1,128 @@
+Pandas - Groupby
+
+-- like in SQL
+-- allows you to group rows with the same value together and then perform some aggregate function on them
+
+Example Dictionary:
+
+data_dict = {'Company':['GOOG','GOOG','MSFT','MSFT','FB','FB'],
+        'Person':['Sam','Charlie','Amy','Vanessa','Carl','Sarah'],
+        'Sales':[200,120,340,124,243,350]}
+
+my_dataFrame = pd.DataFrame(data_dict)
+
+my_dataFrame.groupby('ColumnName)
+
+my_dataFrame.groupby('Company') <-gets a GroupBy object.
+
+byCompany = my_dataFrame.groupby('Company') # Creating new variable
+
+byCompany.mean()
+-- Python automatically ignores the non-numeric columns.
+Output:
+          Sales
+Company
+FB        296.5
+GOOGLE    160.0
+MSFT      232.0
+
+More Aggregrate Funictions
+byCompany.sum()
+byCompany.std()  # aka standard deviation
+
+Yes, those functions return dataFrame
+
+byCompany.sum().loc['FB']: Gives me the sales sum for FB
+
+my_dataFrame.groupby('Company').sum().loc['FB']  <-Same thing, all in 1 line
+
+
+my_dataFrame.groupby('Company').count()
+-- Count each instance of each value
+-- Note, here it does count non-numeric values, since it can count instances of names
+
+        Person  Sales
+Company
+FB        2       2
+GOOG      2       2
+MSFT      2       2
+
+
+
+
+
+my_dataFrame.groupby('Company').min()
+-- For numbers, finds the minimum number
+-- For strings, won't really be helpful
+
+my_dataFrame.groupby('Company').describe()
+
+-- It will give you a bunch of default calculations.
+Result
+
+                      Sales
+--------|-------|---------------
+Company |       |
+--------|-------|---------------
+        | count | 2.0000000
+        | mean  | 296.50000
+        | std   | 75.660426
+        | min   | 243.00000
+   FB   | 25%   | 269.75000
+        | 50%   | 296.500000
+        | 75%   | 323.250000
+        | max   | 350.000000
+--------|-------|----------------
+Same thing for each of the companies, since the describe() function was called on the groupby('Company') function
+
+
+
+.groupby() is similar to SQL's GROUP BY.
+Remember: To actually get a dataFrame result, you need to also specify how you are aggregating the data in each group. Are you "sum"ing (adding) all the numbers in each group together? Finding each group's "min" (minimum)?
+Just like in SQL, you have to specify.
+
+SQL Example:
+SELECT GroupName, sum(PayAmount) FROM myTable GROUP BY GroupName
+
+groupby Example:
+myTable.groupby(by = "GroupName").sum()
+--Note: This sums ALL the columns. 
+To only do 1+ specific columns
+
+For 1 Column (aka when you just want a Series (aka an array) of just the data, (no column/row names/indexes etc.)):
+myTable.groupby(by = "GroupName")['ColumnName'].sum()
+
+For 2+ Columns (or 1 Column): Includes Row/Column Names/Indexes:
+myTable.groupby(by = "GroupName")[['ColumnOne','ColumnTwo','ColumnThree']].sum()
+
+Note: I'm writing the column names BEFORE the .sum() so when Python Pandas reads this code, it will only sum up those specified columns: If I did the column names after the .sum(), it would have summed up all of the columns by the groups and then filtered to only show me the columns I wanted, wasting time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.transpose()
+-- you can add this to the end of any dataFrame, outputs another dataFrame
+-- to flip the table/dataFrame so
+---- the Rows become Columns
+---- and the Columns become Rows
+

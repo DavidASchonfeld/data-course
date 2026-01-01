@@ -1,0 +1,88 @@
+Pandas
+My Own Created Sheet, not based on a specific lecture.
+Also, includes notes via the SF Salaries Exercise.
+
+
+ORDER BY
+my_dataFrame.sort_values(
+    by = ["Column1", "Column2"]
+    ascending = [False, True]
+)
+
+
+my_dataFrame.head()
+--gets top 4 rows plus the column/row names etc.
+--You can specify by putting in:
+my_dataFrame.head(2)
+to get the top 2 rows plus the column/row names etc.
+
+--------------
+WHERE (equivalent to SQL WHERE):
+
+---------
+SELECT * FROM salaryTable WHERE EmployeeName = "JOSEPH DRISCOLL"
+-- "*" Means Select (aka show/display/return) all columns
+
+Pandas Equivalent:
+salaryTable[salaryTable['EmployeeName'] == "JOSEPH DRISCOLL"]
+----------
+SELECT JobTitle FROM salaryTable WHERE EmployeeName = "JOSEPH DRISCOLL"
+
+Pandas Equivalent:
+salaryTable[salaryTable['EmployeeName] == "JOSEPH DRISCOLL"]["JobTitle"]
+
+--- Highest Paid Person in the Salary Table:
+sal[sal['TotalPay'] == sal['TotalPay'].max()]
+Another Way:
+sal['TotalPayBenefits'].idxmax()
+Note: .idxmax() is similar to .argmax in NumPy
+Find the entry with the highest value based on the column
+
+I could also do
+sal.iloc[sal['TotalPayBenefits'].argmax()]
+
+Reminder:
+Navigating DataFrames in Pandas:
+my_dataFrame["byColumnName"].loc["byRowName"]
+
+
+------ Find Person with Lowest Salary
+sal[sal['TotalPay'] == sal['TotalPay'].min()]
+
+same as:
+sal.iloc[sal['TotalPayBenefits].argmin()]
+
+------- # of Unique Job Titles:
+(sal.groupby(by = "JobTitle")["JobTitle"].count()).count()
+To Break This Down:
+sal.groupby(by = "JobTitle")["JobTitle"].count() is a DataFrame with a list of each job and how many people have that specifically worded job. Then, we add a ().count around that to count all of those numbers together to get a total number of rows: how many job titles were listed
+Equivalent Result to doing this: 
+sal['JobTitle'].nunique()  <- To get # of unique values in that specified column
+
+Top 5 Most Common Jobs
+sal['JobTitle'].value_counts.head(5)
+
+
+--How many Job Titles where only 1 Person had that Job Title in 2013?
+sum(sal[sal['Year'] == 2013]['JobTitle'].value_counts == 1)
+# This outputs 
+sal[sal['Year'] == 2013]['JobTitle'].value_counts == 1
+# This outputs a list like:
+
+No Headers but if it had headers:
+JobTitle   True/False if the JobTitle has instance value == 1 in the sal table
+JobTitle    True
+
+True/False list - True for the rows with Column Value 'JobTitle' count == 1
+Let's sum it all up to count
+
+--Table Comparing Job Title String and Salary:
+
+sal['title_len'] = sal['JobTitle'].apply(len)  # Creating New Column Based on JobTitle's String Length
+sal[['JobTitle','title_len']]  # Outputs the 2 columns 'JobTitle' and 'title_len' (including Column Titles/Names and the Indexes of each Row)
+
+sal[['title_len','TotalPayBenefits']].corr()
+# .corr() returns the correlation between 2 columns
+A 1.0 value means that the values are perfectly correlated.
+
+

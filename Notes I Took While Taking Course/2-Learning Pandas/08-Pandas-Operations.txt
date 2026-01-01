@@ -1,0 +1,140 @@
+Pandas - Operations on DataFrames
+
+
+Example Table: 
+my_dataFrame
+   col1  col2  col3
+0    1   444   abc
+1    2   555   def
+2    3   666   ghi
+3    4   444   xyz
+
+my_dataFrame.head() <-shows top 5 rows, including the headers
+
+Let's find all unique values in column 2
+my_dataFrame['col2'].unique()  <-Returns an array of those values
+Returns: ['444', '555', '666']
+
+len(my_dataFrame['col2]).unique() <-Returns # of unique values in that column
+my_dataFrame['col2].nunique() <-Same as line above, returns # of unique values in that column
+Both lines above each return 3
+
+What about both? Unique values and now often they show up.
+
+my_dataFrame['col2'].value_counts()
+returns:
+444   2
+555   1
+666   1
+
+
+Let's Select Data:
+
+Conditional Selection
+Remember Conditional Selection from a Previous Lecture?
+
+1 Condition
+my_dataFrame[my_dataFrame['col1']>2]
+-- Remember, the command inside (here, that's "my_dataFrame['col1']>2") is a boolean series (aka an array of Trues/Falses based on if the #s in col1 are >2 or not.)
+
+Many Conditions
+& for "and"
+| for "or"
+Separate each condition with a set of parentheses ()
+Example: my_dataFrame[(my_DataFrame['col1'] < 2) & (my_dataFrame['col2'] == 444)]
+
+
+def times2(x):
+    return x*2
+
+my_dataFrame['col1'].sum()  # An example of calling a pre-built function onto a column
+
+To Broadcast a custom function (aka apply it element-by-element to the column)
+my_dataFrame['col1'].apply(times2)
+
+my_dataFrame['col1'].apply(len)  # get the length of each string
+
+# Now, let's use a lambda expression to use in the "apply" method
+my_dataFrame['col2'].apply(lambda x: x*2)
+
+Output:
+0   888
+1  1110
+2  1332
+3   888
+
+
+Removing Columns:
+my_dataFrame.drop('col1', axis = 1)
+# Remember: axis = 1 for columns, #axis = 0 for rows
+# inplace = true to actually affect the dataFrame instead of a temporary copy
+
+my_dataFrame.columns  # <-gets a list of column names,
+
+my_dataFrame.index:  # <- Get the indexes
+Output: RangeIndex(start = 0, stop = 4, step = 1))
+
+my_dataFrame.sort_values('col2')
+my_dataFrame.sort_values(by = 'col2')  # same thing as line above since it expects the 1st aparameter to be put in for the "by" variable
+# you can sort by rows or columns, ascending or descending etc.
+# Note: Each row's index is still attach3d to their row
+
+For example: Output of the above line is:
+
+col1 col2 col3
+0  1  444  abc
+3  4  444  xyz
+1  2  555  def
+2  3  666  ghi
+
+
+Finding Null
+
+my_dataFrame.isnull()  # Returns a True/False dataFrame (like the conditioanls like df > 3), going element-by-element to check each individual table cell value to see if it is null.
+If we did this on our current table, each cell would be False since there are no missing values
+
+
+Pivot Table
+
+
+Example:
+data = {'A' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'],
+        'B' : ['one', 'one', 'two', 'two', 'one', 'one'],
+        'C' : ['x', 'y', 'x', 'y', 'x', 'y'],
+        'D' : [1, 3, 2, 5, 4, 1]
+        }
+my_dataFrame = pd.DataFrame(data)
+
+      A    B    C    D
+0    foo  one   x    1 
+1    foo  one   y    3
+2    foo  two   x    2
+3    bar  two   y    5
+4    bar  one   x    4
+5    bar  one   y    1
+
+
+
+my_dataFrame.pivot_table(value='D', index = ['A','B'],columns['C'])  # values = D column, make 'A','B' into a multilevel index, columns to be the C column
+Nan in cells that don't match in the specific point (Ex: for bar two X, there's no value)
+
+      C     x    y
+  A   B
+bar  one |  4.0  1.0
+     two |  NaN  5.0
+foo  one |  1.0  3.0
+     two |  2.0  NaN
+
+
+
+
+
+
+
+
+
+
+
+
+
+

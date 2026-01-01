@@ -1,0 +1,109 @@
+Pandas - Input and Output
+
+Need to Install these Libraries
+
+-- sqlalchemy
+-- lxml
+-- html5lib
+-- BeautifulSoup
+
+To Install them so Jupyter Labs can use them,
+conda install LibraryName
+
+To install them in regular Python on my computer:
+
+pip install LibraryName
+
+
+Import File Sources for This Lecture
+-- CSV Files (Comma Separated Files)
+-- Excel Files
+-- HTML Files
+-- SQL Files
+
+Files must be in same folder as your Jupyter Notebook file
+
+import pandas as pd
+
+
+
+Get this Jupyter Notebook file's location (yes, this file is a .txt, but if you were in a Jupyter Notebook file):
+
+pwd
+
+Example Output (for Windows):
+'C:\\Users\\Marcial'
+
+
+####
+Use my_dataFrame.info() to get # of data entries aka rows
+
+
+################
+
+Input: CSV File
+
+Let's open and read a CSV file
+CSV: pd.read_csv('fileName.csv')  # Autocomplete File Name: Press Tab
+Prints out/Gets the CSV file as a DataFrame
+my_fromCSV_dataFrame = pd.read_csv('fileName.csv)
+
+pd.read_ (then, click Tab, and you can get a list of all options of things that Pandas can read from)
+
+Output: CSV File
+
+my_dataFrame.to_csv('outputFileName', index = False)
+# index = False: means I don't output the file. If index = True, it is also outputted to the file as an additional column.
+
+If you get an error to install the xlrd library, in Terminal/Command Line do "conda install xlrd" or "pip install xlrd"
+
+##################
+
+Input: Excel File
+Note: Remember, there are multiple sheets (aka pages) in Excel
+Pandas will treat each sheet as a different dataFrame
+
+pd.read_excel('inputExcelFileName.xlsx', sheetname='Sheet1')
+
+Output: Excel File
+
+my_dataFrame.to_excel('outputExcelFile.xlsx',sheet_name='NewSheet')  #Yes, unfortunately the "sheet_name" parameter is required
+
+################
+
+Input: HTML File
+Teacher's Example: 
+
+data = pd.read_html('https://www.fdic.gov/bank/individual/failed/banklist.html')
+# Usually, we'll get a list (not a dataFrame directly)
+# Get a list of HTML objects/code
+
+# Let's look for the Table object
+
+data[0].head()
+# That's the data object we are looking for (It's about looking at the actual HTML code you get bakc (or wehn you look at the website in an Internet browser via a Develop tab to see the website's HTML code directly))
+
+################
+
+
+Input: SQL File
+
+-- Remember, there different Python libraries for different versions of SQL.
+-- There are speciailized Python libraries best-suited for specific types of SQL, like PostgresSQL etc.
+-- Right now, we'll use SQLAlchemy
+
+
+from sqlalchemy import create_engine
+engine = create_engine('sqlite:///:memory:')
+# Here, we are creating a SQL engine in-memory (aka once the script stops running, this sql engine stops existing, so it and its contents are not saved)
+# We could also use an actual SQL database on my laptop instead.
+
+Output: SQL File
+Here, since I'm using an in-memory SQL engine, this is passing my dataFrame to the in-memory sql engine
+my_dataFrame.to_sql('my_table',engine)
+
+Input: SQL File
+sqldf = pd.read_sql('my_table', con = engine)  # "con" stands for "connection"
+# It adds an "index" column to the table.
+
+

@@ -1,0 +1,18 @@
+Pandas
+--aka dataframes
+
+conda install pandas
+or
+pip install pandas
+
+
+What the course will teach us from Pandas
+Note: I know some of these concepts from knowing SQL but I'm learning Pandas as something new (besides the self-teaching I did of Pandas myself earlier)
+
+-- Series
+-- DataFrames (I knew that already from self-teaching myself Pandas earlier)
+-- Missing Data
+-- GroupBy
+-- Merging, Joining, and Concatenating
+-- Operations
+-- Data Input and Output
