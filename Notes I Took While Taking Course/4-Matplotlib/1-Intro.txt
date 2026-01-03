@@ -1,0 +1,11 @@
+Matplotlib - Intro
+
+-- most popular Python plotting library
+--designed to be similar to MatLab
+
+To install
+conda install matplotlib
+or
+pip install matplotlib
+
+

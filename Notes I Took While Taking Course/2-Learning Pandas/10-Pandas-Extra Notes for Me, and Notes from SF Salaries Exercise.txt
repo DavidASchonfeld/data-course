@@ -86,3 +86,136 @@ sal[['title_len','TotalPayBenefits']].corr()
 A 1.0 value means that the values are perfectly correlated.
 
 
+#### From SF Salary Exercise Solution Page:
+## How to Use Lambdas with Pandas
+How many people have "Chief" (uppercase only etc.) in their job title?
+def chief_string(title):
+    if 'chief' in title.lower().splits():
+        # This only splits via empty spaces, not by commas etc.
+        return True
+    else:
+        return False
+sum(sal['JobTitle'].apply(lambda x: chief_string(x)))
+# Note: It's easier for me to 
+
+
+##### Notes from the ECommerce HW
+
+ecom = pd.read_csv("Ecommerce Purchases")  # The instructor did not add a .csv file extension to the file name, so I need to leave it off in this script to load in the CSV file.
+
+
+# of Rows/Columns
+# of Columns: (ecom.columns)
+# of Rows: len(ecom.index)
+
+How many people have English as their language?
+ecom[ecom['Language'] == 'en'].count()
+
+How many people have job title lawyer:
+ecom[ecom['Job'] == "Lawyer"].count()
+or
+len(ecom[ecom['Job'] == "Lawyer"].index)
+
+How many people made purchase in the AM versus PM?
+ecom['AM or PM'].value_counts()
+Reminder: value_counts() gives you a table with each unique value, and the amount of times that unique value exists.
+Here, it would output
+
+AM or PM
+AM       5068
+PM       4932
+
+
+5 Most Common Job Titles:
+ecom['Job'].value_counts(ascending = False).head()
+
+Someone made a purchase that came from Lot: "90 WT" , what was the Purchase Price for this transaction?
+ecom[ecom['Lot'] == "90 WT"]["Purchase Price"]
+
+What is Email Address for the person with the following Credit Card Number: 4926535242672853?
+
+Note: Since the Credit Card Number is saved as a string in the table we are searching so you must search it as a string. 
+4926535242672853 will work
+"4926535242672853" will not work, since it is treating it as a string (aka it will not find anything, even though that number exists in the table, because it is searching for a string when these numbers are all stored as numbers in that column)
+Note: The Pandas .read_csv automatically imported that column as a number column, so there are numbers in there. And you can check the column's variable type (ints or strings etc.) So in this case, we need tosearch via numbers
+ecom[ecom['Credit Card'] == 4926535242672853]["Email"]
+
+
+How many people have American Express as their Credit Card Provider and made a purchase above $95
+ecom[(ecom["CC Provider"] == "American Express") & (ecom["Purchase Price"] > 95)].count()
+
+
+
+## Get first cell in a specific column
+ecom['CC Exp Date'].iloc[0]
+
+
+** Hard: How many people have a credit card that expires in 2025? **
+
+----
+My Answer
+def expiresIn2025(inString):
+    return inString.endswith("/25")
+
+(ecom["CC Exp Date"].apply(lambda x : expiresIn2025(x))).sum()
+----
+Lecturer's Answer
+
+ecom["CC Exp Date"].apply(lambda x : x[3:]=='25').count
+[3:] He was using: Choose the 3rd and later characters for that column.
+Since the values are 12/24, then [3:] would only have the /24 part aka the year part, so this would work
+And then we need .count to count the amount
+
+-----
+Get Top 5 Common Email Address Providers (Ex: Gmail.com)
+
+My Answer:
+def getEmailProvider(inString):
+    string_inTwoPieces = inString.split('@')
+    return string_inTwoPieces[1]
+ecom['Email'].apply(lambda x: getEmailProvider(x)).value_counts(ascending = False).head()
+
+
+Lecturer's Answer:
+
+ecom['Email'].apply(lambda x: x.split('@')[1]).value_counts().head(5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
