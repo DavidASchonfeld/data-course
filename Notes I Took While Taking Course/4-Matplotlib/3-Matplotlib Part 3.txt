@@ -1,0 +1,151 @@
+Matplotlib Part 3
+
+
+
+# Plot Appearance
+
+fig = plt.figure(O)
+
+ax = fig_axes([0, 0, 1, 1])
+
+ax.plot(x, y)
+# Remember, we're not specifying an "x", "y" here since I'm just typing in this .txt document. Since the lecturer is using the same Jupyter Notebook file that he used for the previous lectures, there is already a defined x variable and y variable.
+So
+I'll just define them here again
+x = np.linspace(0,5,11)
+y = x ** 2  # (aka y to the power of 2)
+
+and then type the code from above again
+fig = plt.figure(O)
+
+ax = fig_axes([0, 0, 1, 1])
+
+
+
+
+Line Colors
+
+ax.plot(x, y, color = 'orange')
+# color = defines color of the line. Basic color names like "orange", "blue, "green" etc. works
+# Color" also accepts RGB hexcodes Ex: '#FF8C00' (Yes, it is a string)
+# Color Hexcodes for specific colors can be found via searching the Internet.
+
+ax.plot(x, y, color = '#FF8C00')
+
+ax.plot(x, y, color = '#FF8C00', linewidth = 1)  # linewidth = 1 is the default line
+# Yes, you can use alpha value (aka transparency value) for the lines, included below in the "Line Widths" section.
+
+
+
+
+Line Widths (and Alpha (aka Transparency) Values)
+
+ You can do thicker and thinner lines
+Ex: ax.plot(x, y, color = 'Purple', linewidth = 20)
+Ex: ax.plot(x, y, color = 'Blue', linewidth = 0.5)
+
+Yes, you can use alpha value (aka transparency) for the lines.
+# Reminder: Alpha value is a decimal representing % percentage.
+Ex: ax.plot(x, y, color = 'Red', linewidth = 3, alpha = 0.5)
+
+# The parameters: "lw" = "linewidth"
+So it is a shorter/shorthand way of calling the same parameter.
+For example:
+ax.plot(x, y, color = 'purple', linewidth = 3, alpha = 0.5)
+ax.plot(x, y, color = 'purple', lw        = 3, alpha = 0.5)
+are exactly the same and do the exact same thing.
+Choosing to call "lw" or "linewidth" parameters doesn't matter - they do the exact same thing
+Note: The extra whitespace after lw doesn't do anything. I just added it to make it easier to see that those two commands are exactly the same besides calling 2 different names for the same parameter linewidth/lw.
+
+
+
+
+Linestyles:
+
+Ex: Regular Line, Dotted Line, Dashed Line etc.
+ax.plot(x, y, color = 'purple', linewidth = 3, alpha = 0.5, linestyle = '--')
+  -   makes a solid line (the default value, which occurs if you don't specify linestyle's value)
+  --  makes dashed line
+  -.  makes a dash-point-dash-point line
+  :   makes a line make of small dashed vertical (large height, small width) lines
+steps makes the line turn into a step-like pattern while still hitting the data points
+
+# Just like with linewidth, there is an abbreviation ls, which is the same parameter, just shorter to type.
+# linestyle = ls
+# Just like with linewidth, linestyle and ls are exactly the same, 
+ax.plot(x, y, color = 'purple', linewidth = 3, alpha = 0.5, linestyle = '-')
+ax.plot(x, y, color = 'purple', linewidth = 3, alpha = 0.5, ls        = '-')
+
+
+
+
+Markers
+
+As we know, the x and y values we are using is technically not a straight line but 2 arrays/lists of points (and together, they are coordinates of points, with eahc location as (x, y)): 
+I'll put here again for convenience:
+x = np.linspace(0,5,11)
+y = x ** 2  # (aka y to the power of 2)
+(As a reminder, this is 11 numbers, evenly spaced between (and including 5)
+So, in ugly format, as printed by the Jupyter Lab notebook if I just type in "x" and "y" afterwards, you see that x and y are: (with my neatening this):
+x: array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5, 5. ])
+y: array([ 0.  ,  0.25,  1.  ,  2.25,  4.  ,  6.25,  9.  , 12.25, 16.  ,
+       20.25, 25.  ])
+So point 0 is (0, 0), point 1 is (0.5, 0.25), point 2 is (1., 1.) etc.
+Markers mark on the line exactly where those points exist on the line.
+
+
+ax.plot(x, y, color = 'purple', linewidth = 3, linestyle = '-', marker = 'o')
+o = circle/dot for each point.
+There are lots of codes for different types of points, which you can see at the matlibplot website
++
+0
+etc.
+
+
+Marker Size
+ax.plot(x, y, color = 'purple', linewidth = 3, linestyle = '-', marker = 'o',, markersize = 10)
+
+Marker Color (Face Color and Edge Color) and Marker Border Thickness
+ax.plot(x, y, color = 'purple', linewidth = 3, linestyle = '-', marker = 'o', markersize = 10, markerfacecolor = 'red', markeredgewidth = 3, markeredge = 'green')
+# markerfacecolor = color inside the circle
+# markeredgecolor = circle's border color
+# markeredgewidth = circle/dot's border thickness
+
+
+
+Control over Axis Appearance
+
+Plot Range:
+ax.plot(x, y, color = 'purple', linewidth = 2, linestyle = '--')
+ax.set_xlim([inclusive_lowerBound, inclusive_upperBound])
+ax.set_ylim([inclusive_lowerBound, inclusive_upperBound])
+
+For example:
+ax.set_xlim([0, 1])
+ax.set_ylim([0, 2])
+
+Since we are zooming in so much, the line looks more like an angled line connecting your points instead of a curve.
+We can fix that by
+-- zooming out to show more of our points that make a more curve pattern in total
+-- adding more data points
+
+
+
+Special Plot Types
+Ex: Scatter Plots, Histograms etc.
+Note: Besides Matplotlib, we will also use Seaborn (which we will learn in upcoming lectures)
+
+Scatter Plot
+plt.scatter(x, y)
+
+
+Histogram:
+from random import sample
+data = sample(range(1, 1000), 100)
+plt.hist(data)
+
+
+# This class has a "Matplotlib Concepts Lecture" Jupyter notebook is a good reference sheet for different graphs and links for websites on how to use matplotlib
+
+
+
