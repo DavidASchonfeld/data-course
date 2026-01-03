@@ -1,0 +1,70 @@
+Matplotlib - "Matplotlib Concepts Lecture"
+
+The notebook "Matplotlib Concepts Lecture" from the course resources has all the code for this lecture.
+
+#####
+
+import matplotlib.pyplot as plt
+
+######
+In Jupyter Notebook:
+
+%matplotlib inline
+
+# This command allows you to see the via image of the Matplotlib graphs/plots/etc. in the actual Jupyter Notebook.
+#######
+
+import numpy as np
+x = np.linspace(0,5,11)
+y = x ** 2  # (aka y to the power of 2)
+
+
+Two Ways of Creating a Matlibplot
+Functional Method
+# FUNCTIONAL
+plt.plot(x,y)
+plt.show() <- If you're not in Jupyter Notebook, this command is needed to show the image of the graph.
+
+# Personalizing Labels
+plt.xlabel('X Label')
+plt.ylabel('Y Label')
+plt.title('Title')
+
+
+
+# plt.subplot(NumRows,NumColumns,PlotNumber You Are Referring To)
+plt.subplot(1,2,1)
+plt.plot(x,y,'r')  # 'r' means red
+
+plt.subplot(1,2,2)
+plt.plot(y,x,'n')  # 'b' means blue
+
+
+Object-Oriented Method
+# OBJECT-ORIENTED
+fig = plt.figure()  # Creates a figure object (blank canvas)
+
+# axes = fig.add_axes([Left, Bottom, Width, Height])  #axes. Here it means plural of "axis"
+
+axes = fig.add_axes([0.1, 0.1, 0.8, 0.8])  #axes. Here it means plural of "axis"
+axes.plot(x,y)
+# Now we put the plot we did earlier, but in an object-orientedmethod
+axes.set_xlabel('X Label')
+axes.set_ylabel('Y Label')
+axes.set_title('Title')
+
+
+Now, let's put 2 sets of figures on 1 canvas.
+
+
+
+
+
+
+
+
+
+
+
+
+
