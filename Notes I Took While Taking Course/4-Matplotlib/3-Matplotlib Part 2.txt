@@ -1,0 +1,125 @@
+Matplotlib - Part 2
+
+#############################################
+Plots (Object-Oriented Calling)
+(As already noted in previous lecture)
+############################################
+
+# Object-Oriented Version
+fig = plt.figure()
+
+axes1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+axes2 = fig.add_axes([0.2, 0.5, 0.4, 0.3])
+
+axes1.plot(x, y)
+axes1.set_title('LARGER PLOT')
+
+axes2.plot(y, x)
+axes2.set_title('SMALLER PLOT')
+
+
+
+
+
+##############################################
+# Subplots
+##############################################
+fig, axes = plt.subplots()
+axes.plot(x, y)
+
+# How is subplots different than creating a plot from the previous lecture "Matplotlib-Part 1"?
+You can specify # of rows and columns
+
+
+fig, axes = plt.subplots(nrows = 1, ncols = 2)
+# This creates 1 row, 2 columns aka 2 sets of axes to fill the screen aka (1 row, 2 columns) of identical blank chart/graph areas.
+
+# Subplots is just calling the .figure and axes commands automatically, based on the nrows and ncols values that you give it.
+
+
+fig, axes = plt.subplots(nrows = 3, ncols = 3)
+# Creating a canvas with 3-by-3 table (no borders) of empty evenly spaced chart areas
+# Unfortuantely, the numbers labeled on the axes all overlap with each other, making each chart hard to read. To fix that:
+
+plt.tight_overlap()  # Fixes overlaps between overlapping numbers/tables etc. in subplots
+
+axes <- just an array/list of matplotlib axes objects
+So you can iterate through it.
+
+for current_ax in axes:
+    current_ax.plot(x, y)
+
+That also means you can access certain axes objects via axes[indexNumber] etc.
+
+For example:
+axes[0].plot(x, y)
+axes[0].set_title('First Plot')
+
+axes[1].plot(y, x)
+axes[1].set_title('Second Plot')
+
+
+
+
+
+#############################################
+Figure Size, Aspect Ratio and DPI
+#############################################
+
+fig = plt.figure(figsize = (width_inches, height_inches), dpi = 100)  # DPI (Dots per Inch aka Pixels Per Inch) There is a default dpi value  you don't need to add that parameter unless you want to change it. DPI = Dots Per 
+
+fig = plt.figure(figsize = (3, 2), dpi = 100)
+ax = fig.add_axes([0, 0, 1, 1])
+ax.plot(x, y)
+
+
+
+fig, axes = plt.subplot(nrows = 2, ncols = 1, figsize=(8,2))
+axes[0].plot(x, y)
+axes[1].plot(x, y)
+
+plt.tight_layout()
+
+
+## Export/Save to a File (aka Outside of Your Code/Script)
+fig.savefig('my_picture.png')
+fig.savefig('my_picture.jpg')
+etc.
+You can specificy DPI, even if you didn't when you used figsize earlier
+Ex: fig.savefig('my_picture.png', dpi = 200)
+
+
+#### Adding Labels, like before
+fig = plt.figure()
+ax = fig.add_axes([0, 0, 1, 1])
+ax.plot(x, y)
+
+ax.set_title('Title')
+ax.set_ylabel('Y Label')
+ax.set_xlabel('X Label')
+
+
+
+
+
+
+
+#############################################
+Legends 
+###########################################
+
+ax = fig.add_axes([0, 0, 1, 1])
+ax.plot(x, y, label = 'X Squared')  # "label" parameter: Needed for .legend() to acceess each plot call (aka each line/graph on this plot area) so it can label it
+ax.plot(y, x, label = 'X Cubed')
+# Yes, here, I'm adding 2 different lines on the same plot/graph. Matplotlib automatically assigns them different colors. It stil lwoudl be good/important for you, the programmer, to label them so people understand what each lines represents/tells us/means etc.
+
+# Legend
+ax.legend() # Since the labels are specified in the ax.plot calls above, this automatically  
+
+
+ax.legend(loc = 0) # <-also has lots of parameters, including "loc", which lets you specify the location (Ex: 1 (means "upper right"), 2 (means "upper left", etc.) or let it decide for you (0 = "best") (The key/meaning for all of these number codes is on the website.
+https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html#matplotlib.axes.Axes.legend (Latest URL as of January 3, 2026)
+
+If none of the "loc" codes work well for you (meaning that it still looks ugly, overlaps with the lines plotted etc.), you could use a tuple instead to very specifically (with % percentages, represented by decimal numbers) decide where the legend should be:
+ax.legend(loc = (0.1, 0.1))
+
