@@ -149,3 +149,12 @@ plt.hist(data)
 
 
 
+### 
+A note from the exercise page on using Matplotlib in Jupyter Notebook
+
+Quote from the exercise sheet:
+
+** * NOTE: ALL THE COMMANDS FOR PLOTTING A FIGURE SHOULD ALL GO IN THE SAME CELL. SEPARATING THEM OUT INTO MULTIPLE CELLS MAY CAUSE NOTHING TO SHOW UP. * **
+
+
+
