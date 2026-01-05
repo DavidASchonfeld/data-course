@@ -79,6 +79,7 @@ axes[0].plot(x, y)
 axes[1].plot(x, y)
 
 plt.tight_layout()
+# fit <-Just adding that to make it easier to find this tight_layout function.
 
 
 ## Export/Save to a File (aka Outside of Your Code/Script)
