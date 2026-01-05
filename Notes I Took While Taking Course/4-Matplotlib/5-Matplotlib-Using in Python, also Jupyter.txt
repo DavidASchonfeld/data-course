@@ -1,0 +1,43 @@
+pip install matplotlib
+or
+conda install matplotlib
+<- conda is needed for Jupyter Lab (since Jupyet Lab is run from the Anaconda set of packages)
+
+
+import matplotlib.pyplot as plt
+
+
+In 1st cell:
+%matplotlib inline
+
+
+Creating a Plot/Graph:
+fig1 = plt.figure()
+ax1 = fig1.add_axes([0, 0, 1, 1])
+ax1.plot(x, y)
+ax1.set_ylabel('y')
+ax1.set_xlabel('title')
+plt.show()
+
+
+Showing a Figure i
+
+The "%matplotlib inline" should have gotten Jupyter Labs to automaticalluy show each plot once its set up, but, for my laptop, it doesn't automatically show.
+
+
+plt.show()  # <- Works for right after creating
+
+To Show the Graph Created in Other Cells
+(and yes, you can also reference, update, etc. the graph in other cells)
+
+Type the name of the figure object that the graph/plot was created with.
+Ex: Let's use the graph and its "parent" figure listed above:
+fig1
+Yes, that's it. Just write the name of the figure, which in this case is "fig1"
+
+
+
+
+
+
+

@@ -12,4 +12,4 @@ pip install matplotlib
 # Creates graphs, chart, etc.
 
 # If you want to make a specific chart/plot/graph/etc. (For example: Pie Chart),
-Go to the official matplotlib website (matplotlib.org), browse the options, click on the exazmple page, and it has well-commented code and instructions for how to create the specific chart/plot/graph/etc. that you want to create
+Go to the official matplotlib website (matplotlib.org), browse the options, click on the example page, and it has well-commented code and instructions for how to create the specific chart/plot/graph/etc. that you want to create
