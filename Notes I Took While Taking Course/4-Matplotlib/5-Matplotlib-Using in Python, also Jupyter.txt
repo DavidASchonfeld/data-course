@@ -19,13 +19,19 @@ ax1.set_ylabel('y')
 ax1.set_xlabel('title')
 plt.show()
 
+###############################################################
+Showing a Figure in Jupyter Labs
+###############################################################
 
-Showing a Figure i
+plt.show()  # <- Works for right after creating
+
+Note: It's best to put all of the commands/code for each figure/chart/graph in the same cell - otherwise, you might run into problems. Below (in this section) are details if you want to try anyway.
+
 
 The "%matplotlib inline" should have gotten Jupyter Labs to automaticalluy show each plot once its set up, but, for my laptop, it doesn't automatically show.
 
 
-plt.show()  # <- Works for right after creating
+
 
 To Show the Graph Created in Other Cells
 (and yes, you can also reference, update, etc. the graph in other cells)
@@ -36,6 +42,13 @@ fig1
 Yes, that's it. Just write the name of the figure, which in this case is "fig1"
 
 
+#############################################################
+Plots do NOT clear when you re-run Cells
+#############################################################
+
+Plot/canvas does NOT clear if you run the same cell multiple times -it just draws over.
+So if you had it draw 1 line, and then run the cell again after telling it to plot a different line, it will still keep the old one.
+It's recommended for you to declare/creat ethe figure object in the same cell that you create the axes objects and draw/plot the lines. That would solve this and other issues.
 
 
 
