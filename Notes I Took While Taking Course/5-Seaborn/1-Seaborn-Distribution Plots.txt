@@ -1,0 +1,107 @@
+Seaborn - Distribution Plots
+
+
+import seaborn as sns
+
+%matplotlib inline  #<-So we can see matplotlib in our Jupyter Notebook
+
+tips = sns.load_dataset('tips')  # this dataset is loaded into a dataFrame
+
+# people who had a meal and left a tip
+
+
+##########################################
+Distribution Plot/Histogram
+##########################################
+
+
+sns.distplot(tips['total_bill'], kde = 'False', bins = 30)  #Passing in 1 column
+# kde
+### kde = 'True' (default value). There is a curved line around the bars/points of the graph
+### kde = 'False' That curved line described above is not drawn.
+
+# bins
+--Histogram: has bins (aka ranges of numbers/values), counts how many values are in that bin (each bin is representing by a different vertical bar). So the y column of that grpah will be: how many entries are in that bin
+### You don't need to use/set this variable. If you do use it, you can choose how many bars (aka bins) appear. (how many "bins" that the data's numbers are split in between)
+
+
+# Lecturer: If you get a Warning, don't worry - has to do with a different package StatsModels.
+
+##########################################
+Joint Plot
+##########################################
+
+You can combine 2 different distribution plot
+and a kind variable that's les us choose how we want to compare those 2 different distributions
+
+sns.jointplot(x = 'total_bill', y = 'tip', data = tips, kind = 'hex')
+# x and y each have to be a column
+# kind
+### Optional Paramter
+### Shows how the chart displays the relationship between x and y.
+
+kind = ????
+Default shows a scatter plot (aka dots that plot x and y onto the chart)
+
+kind = 'hex': Shows a hexagon distribution instead. If an area where a hexagon is in has lots of points in it, it gets darker. And if an area with a hexagon has less points, it gets lighter
+
+hex = 'reg': Stands for "regression". Looks like scatter plot, and an additional regression line drawn onto it. A linear fit to the scatter point data.
+
+hex = 'kde': shows density of where the points show up the most (looks like a paint mark/stain)
+
+
+###########################################
+Pair Plot
+###########################################
+
+sns.pairplot(tips)
+# Takes a while to load if you have a large dataFrame (aka lots of data)
+
+# Shows lots of joinplots, in a large table of jointplots, comparing each numerical column in the input dataframe with another numeral column in the input dataframe
+
+# hue
+### Optional PArameter
+### Put in Column Name with NonNumbers (aka Category, like "Male" or "Female"
+------ will color parts of data for each category
+
+# palette
+### Optional Parameter
+--- You can choose which color scheem to use
+
+
+##########################################
+Rug Plot
+##########################################
+
+Let's use Rug Plot to explain KDE plot from earlier
+
+sns.rugplot(tips['total_bill])
+# pass in a single column
+
+
+
+Difference Between Histogram and Rug Plot
+--Histogram: has bins, counts how many dashes are in that bin
+
+RugPlot: draws a dash mark for every point along the distiution line aka draw a line (instead of a point) for each data point, 
+
+KDE plot:
+Stands for "Kernel Density Estimation" plots
+
+He shows dashes, and each dash has its own "normal distribution" (that hump shape) above each one. Now let's sum up all of those "normal distribution" humps. That sum IS the KDE.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
