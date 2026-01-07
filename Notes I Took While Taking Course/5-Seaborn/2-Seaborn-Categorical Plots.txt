@@ -1,0 +1,90 @@
+Seaborn - Categorical Plots
+
+import seaborn as sns
+%matplotlib inline
+tips = sns.load_dataset('tips')
+tips.head()
+
+import numpy as np
+
+####################################################
+Bar Plot
+####################################################
+sns.barplot()
+
+## Agreggate data based on a function
+
+sns.barplot(x = 'sex', y = 'total_bill', data = tips, estimator = np.std)
+# Category, Numerical Column, Data, Funciton that computers the average/estimator for each category 
+# Shows all data sorted into bars based on sex,
+then the y = average tip based on what each gender is tipping
+
+estimator:
+    "callable that maps vector -> scalar, optional,
+    "statistical funciton to estimate within each categorical bin" (quote from the function description)
+# By default, it is the mean (aka the average)
+Passing in np.std means it will instead take the standard deviantion
+
+
+sns.countplot(x = 'sex', data = tips)
+# counts the occurences for each value
+# similar to Pandas.counts via the category I put in
+# the y is automatically chosen as the count #
+
+Box Plot
+also known as "Box and Whisker Plot"
+
+
+sns.boxplot(x = 'day', y = 'total_bill', data = tips, hue = 'smoker')
+x = categorical
+y = number
+# box: core tiles of the data distribution
+# whiskers show rest of data distribution
+# dots outside of whiskers are the data outliers
+
+# hue: optional parameter
+# If you choose it, it colors in and creates different boxes for each category (in this case, day), each colored differently, with a key to say what each color says
+
+####################################################
+Violin Plots
+####################################################
+sns.violinplot(x = 'day', y = 'total_bill', data = tips, hue = 'sex', split = True)
+Very similar to box plot.
+Allows us to show kernel density of the distribution
+A lot more information about disturbitunop of all, but less info since it has no whiskers and shows where the most points are located etc.
+
+Yes, hue is possible here
+Hue is optional
+Shows 2 violin plots next to each other in each category. You could also do 
+Split
+(Default is False)
+Make it true + Hue: Each Violin shape is split in half based on the category, so it's much easier to compare the 2 categories together (sex) in each day slot.
+
+You have to know which graph/visualization that your audience wants.
+
+
+####################################################
+Strip Plot
+####################################################
+
+sns.stripplot(x = 'day', y = 'total_bill', data = tips)
+
+"essentially a scatter plot based on a category" quote from the lecturer
+Strip Plot Flaw: You can't tell how many points are stacked on top of each other. To fix that, add the Jitter Parameter. Adds a little random noise to left/right to spread out the points a bit so you can hopefully see better where there are more/less data points
+
+sns.stripplot(x = 'day', y = 'total_bill', data = tips, jitter = True)
+
+You can add hues to have color-coded dots based on a category.
+sns.stripplot(x = 'day', y = 'total_bill', data = tips, jitter = True, hue = 'sex')
+
+You can do "split" like with a violin plot, splitting each category into 2 separate areas, each for the area with a different category
+sns.stripplot(x = 'day', y = 'total_bill', data = tips, jitter = True, hue = 'sex', split = True)
+
+
+
+
+
+
+
+
+
