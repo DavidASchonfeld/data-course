@@ -12,7 +12,7 @@ Bar Plot
 ####################################################
 sns.barplot()
 
-## Agreggate data based on a function
+## Aggreggate data based on a function
 
 sns.barplot(x = 'sex', y = 'total_bill', data = tips, estimator = np.std)
 # Category, Numerical Column, Data, Funciton that computers the average/estimator for each category 
@@ -79,6 +79,56 @@ sns.stripplot(x = 'day', y = 'total_bill', data = tips, jitter = True, hue = 'se
 
 You can do "split" like with a violin plot, splitting each category into 2 separate areas, each for the area with a different category
 sns.stripplot(x = 'day', y = 'total_bill', data = tips, jitter = True, hue = 'sex', split = True)
+
+
+
+####################################################
+Swarm Plot
+####################################################
+
+
+Swarm Plot = Violin PLot + Strip Plot
+
+sns.swarmplot(x = 'day', y = 'total_bill', data = tips)
+
+It looks like the dots in the shape of the violin plot
+(and yes, it shows all the actual dots)
+
+Downside: Don't scale well in large #s since the points go too wide, and takes a long time to computational
+Lecturer recommends not to use it for large data sets, probably better to stay away from Swarm plots in general
+
+
+####################################################
+Swarm + Violin Plot
+####################################################
+
+
+sns.violinplot(x = 'day', y = 'total_bill', data = tips)
+sns.swarmplot(x = 'day', y = 'total_bill', data = tips, color = 'black')
+This shows the swarmplot's dots right on top of the violin plot underneath.
+So you can see both at the same time, in the same chart/graph.
+
+
+####################################################
+Factor Plots
+####################################################
+# Aka general method to create lots of the plots we specified above.
+
+sns.factorplot(x = 'day', y = 'total_bill', kind = 'bar')
+
+
+# kind: type of factor plot
+kind = 'bar' <-creates a bar plot
+kind = 'violin' <-creates a bar plot
+
+Another Example:
+sns.factorplot(x = 'day', y = 'total_bill', kind = 'violin')
+
+
+Lectruer Says: Box Plots = Easy to Read: Management likes it
+
+
+
 
 
 
