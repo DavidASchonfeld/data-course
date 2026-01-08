@@ -1,0 +1,66 @@
+Seaborn - Grids
+
+
+import seaborn as sns
+%matplotlib inline
+iris = sns.load_dataset('iris')
+iris.head()
+# measures of flowers
+
+
+We can list different unique values of flowers
+
+iris['species'].unique()
+
+
+# Simpe Pair Plot
+#pair plot is automated join plot for the entire set
+
+sns.pairplot(iris)
+
+
+Let's use Seaborn to customize the pairplot with more control over the actual plots
+
+sns.PairGrid(iris)
+Just gives us an empty pair grid (like an empty pairplot) based on iris's columns/rows types/labels.
+
+
+Let's use it
+g = sns.PairGrid(iris)
+g.map(plt.scatter)
+
+It will map a scatter plot on all plots
+
+Let's specifically change ideas for diagonal parts
+
+g.map_diag(sns.distplot)
+g.map_upper(plt.scatter)  # above the diagonal line (where the chart compares each value with each other on the .corr table.)
+g.map_lower(sns.kdeplot)
+# Noting: He's passing in the plot functions themselves
+
+
+FacetGrid:
+
+tips = sns.load_dataset('tips')
+
+g = sns.FacetGrid(data = tips, col = 'time', row = 'smoker')
+# instead of numbers, put in column names for data frame.
+Empty 4 grids shown
+
+Let's fill the griod
+g.map(sns.distplot, 'total_bill')
+
+I am mapping a plot type, and separating results based on column and row, based on column names
+Results from Example:
+
+ smoke = Yes | time = Lunch   smoker = Yes | time = Dinner
+       [Graph Here]                  [Graph Here]
+
+ smoke = No  | time = Lunch   smoker = No  | time = Dinner
+       [Graph Here]                  [Graph Here]
+
+
+# Rows and Columsn are What you want to separate by.
+
+What if I tried 'total_bill' for scatter plot? Add the additional arguments. (For scatter plot, we are comparing 'total_bill' VS 'tip' amount, so we need 2 parameters (aka 2 column names) for this one. )
+g.map(plt.scatter, 'total_bill', 'tip')

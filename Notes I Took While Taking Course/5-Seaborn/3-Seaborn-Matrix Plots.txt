@@ -1,0 +1,93 @@
+Seaborn - Matrix Plots
+
+import seaborn as sns
+%matplotlib inline
+
+tips = sns.load_dataset('tips')
+flights = sns.load_dataset('flights')
+
+##################################################
+Corr
+##################################################
+
+.corr stands for "Correlates/Correlating etc.
+
+
+tips.corr()
+# matrix
+# A Table, showing how each numerical value correlate with eaech other
+Value = 1.00 means that the values line up perfectly
+So when a column is compared to itself, as seen in the diagonal rows from top left to bottom right, it will have value = 1.00
+
+tips.corr():
+            total_bill   tip     size
+total_bill      1.00     0.67    0.59
+tip             0.67     1.00    0.48
+size            0.59     0.48    1.00
+
+
+##################################################
+HeatMap
+##################################################
+
+sns.heatmap(tips.corr()):
+
+Heatmap colors in those values into a grid pattern based on a gradient scale.
+
+annot
+# Stands for Annotations
+# Optional
+# Writes the numbers in each of heatmap's cells
+
+cmap
+# Stands for Color Map (which color gradient you want to use  to color in the heat)
+# Optional
+
+sns.heatmap(tips.corr(), annot = True, cmap = ):
+
+
+
+flights.pivot_table(index = 'month', columns = 'year', values = 'passengers')
+
+sns.heatmap(flights.pivot_table(index = 'month', columns = 'year', values = 'passengers'))
+
+You can see heatmap based on that pivoted table, so you cna easily tell which month of which year had the most flights
+
+
+Let's add arguments.
+
+
+sns.heatmap(flights.pivot_table(index = 'month', columns = 'year', values = 'passengers'), cmap = 'magma', linecolor = 'white' , linewidths = 1)
+# Easy to see dark-to-light 
+# linecolor, linewidths <-Can add lines between each cell on your heatmap
+
+
+##################################################
+Cluster Maps
+##################################################
+
+
+sns.clustermap(flights.pivot_table(index = 'month', columns = 'year', values = 'passengers'))
+
+The X and Y Axises Ranges are now NOT in order
+They are clustered by similarity.
+-- The X Axis (Years) are not in order
+-- The Y Axis (Months) are not in order
+Instead, months with similar # of flights are clustered together
+and years with similar # of flights are clustered together
+So it's easier for you which months have similar flight amounts to each other., which years have similar amounts to each other etc.
+
+Looks like a heatmap but there are also brackets (like March Madness Brackets) attached to/drawn outside of the heatmap, trying to describe which columns/rows values have more similarity
+
+
+sns.clustermap(flights.pivot_table(index = 'month', columns = 'year', values = 'passengers'), cmap = 'coolwarm', standard_scale = 1)
+
+standard_scale
+= 0  # refers to rows
+= 1  # refers to columns
+
+"standardize" the values for each cell.
+Meaning, for each cell do this
+ value - minimum/maximum
+
+
