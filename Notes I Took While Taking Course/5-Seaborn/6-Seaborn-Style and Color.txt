@@ -1,0 +1,93 @@
+Seaborn - Style and Color
+
+
+Let's pull in the tips dataset to use
+
+import seaborn as sns
+%matplotlib inline
+tips = sns.load_dataset('tips')
+tips.head()
+
+
+
+
+#####################################
+Styles
+#####################################
+
+
+sns.set_style()
+# This sets the style for the plots you create from now on (until you call sns.set_style again)
+# Note: This is styling the blank/grid area where the graphs will be drawn onto.
+Use "Shift-Tab" when typing in set_style() in JupyterNotebook to see options
+Example:
+
+sns.set_style('white')
+
+Possible Inputs:
+sns.set_style(style = dict to put in OR premade styles as a string "darkgrid", "whitegrid", "dark", "white", "ticks")
+
+sns.countplot(x = 'sex', data = tips)
+
+sns.despine(left = True, bottom = True)
+# This removes the background lines in the grid background. (Lecturer says it removes all 4 spines)
+
+Example:
+sns.set_style('white')
+sns.countplot(x = 'sex', data = tips)
+sns.despine(left = True, bottom = True)
+
+
+
+Remember, Seaborn plots are mostly callbacks to matplotlib
+
+plt.figure(figsize = (12, 3))
+sns.countplot(x = 'sex', data = tips)
+Seaborn is using that Matplotlib funciton (of talking about canvas size) So Seaborn works with Matplotlib
+
+
+Let's use figure for a poster
+sns.set_context(context = None, font_scale =)
+
+This is what shift + Tab (in Jupyter Notebook) shows us about this method:
+sns.set_context(context = None, font_scale =)
+Parameters:
+context: dict, None or one of {paper, notebook, talk, poster}.
+    dictoinary of parameters or the name of a preconfigured set
+font_scale: float, optional,
+    Separate scaling factor to independently scale the size of font elements
+rc: dict, optional:
+    Parameter mappings to override the values in the preset seaborn context dictionaries. This only updates parameters that are considered part of the context definition.
+
+
+sns.set_context(context = 'poster', font_scale = 3)
+sns.countplot(x = 'sex', data = tips)
+
+
+
+#####################################
+Colors
+#####################################
+
+
+
+
+From Previous Lectures:
+
+sns.lmplot(x = 'total_bill' y = 'tip', data = tips, hue = 'sex')
+--this automatically color-codes the data into the category designated in the hue parameter. Here, it automatically codes blue for male, green for female, draws separate linear regression lines for them too.
+
+
+#Also, from previous lectures
+We can pass into the "palette" parameter to choose from some preset color schemes
+sns.lmplot(x = 'total_bill' y = 'tip', data = tips, hue = 'sex', palette = 'coolwarm')
+
+
+Let's google matplotlib's colormap's documentation's webpage
+
+
+We can see a list of all of the preset color gradients, and the string we need to pass in to get the specific gradient color that we want
+
+For example, let's use the colormap (aka the color theme) called "seismic"
+
+sns.lmplot(x = 'total_bill' y = 'tip', data = tips, hue = 'sex', palette = 'seismic')
