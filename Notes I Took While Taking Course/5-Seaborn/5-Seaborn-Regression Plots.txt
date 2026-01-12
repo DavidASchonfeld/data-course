@@ -1,0 +1,61 @@
+Seaborn - Regression Plots
+
+
+# Seaborn has many regression plots, but we won't really be discussing regression until the Machine Learning section of this course.
+
+import seaborn as sns
+%matplotlib inline
+tips = sns.load_dataset('tips')
+tips.head()
+
+sns.lmplot(x = 'total_bil'', y = 'tip', data = tips)
+# It's a scatter plot, with a linear fit on top of it
+
+
+Let's add hue to separate based on category.
+
+sns.lmplot(x = 'total_bil'', y = 'tip', data = tips, hue = 'sex')
+Since we are setting hue = gender,
+now there are 2 overlaping scatterplots/linear fits (one per sex), color-coded by the category (sex)
+
+We use the same paraemters as matplotlib
+For example:
+markers = []
+# Since we are using hue (to show 2 different plots based on the different values in 1 category column), we need to pass in a list of marker shapes instead of just one marker shape
+
+sns.lmplot(x = 'total_bil', y = 'tip', data = tips, hue = 'sex', markers = ['o', 'v'])
+-- Now upside triangles for females, circles for males.
+Lets's make the dots larger
+
+matplotlib parameters into the plt scatter thing
+
+Seaborn sns.lmplot is calling matplotlib under the hood
+This is a case-by-case basis depending on type of graph you are choosing
+sns.lmplot(x = 'total_bil'', y = 'tip', data = tips, hue = 'sex', markers = ['o', 'v'], scatter_kws={'s': 100})
+
+We could add more
+sns.lmplot(x = 'total_bil', y = 'tip', data = tips, col = 'sex')
+# Now we have 2 separate side-by-side graphs, 1 for each sex value (male, female)
+
+sns.lmplot(x = 'total_bil', y = 'tip', data = tips, col = 'sex', row = 'time')
+Now we have a 2-by-2 table of 4 graphs
+
+time = Lunch, sex = Male    time = Lunch, sex = Female
+
+time = Dinner, sex = Male   time = Dinner, sex = Female
+
+
+
+
+sns.lmplot(x = 'total_bil', y = 'tip', data = tips, col = 'sex', aspect = 0.6, size = 8)
+-- Only col parameter but no row perimeter means there will only be 1 row of multiple graphs, side-by-side
+-- "aspect": aka "Aspect Ratio: Height VS Width drawing, applies to each grid. 0.6 means taller/skinnier graph
+-- "size": Size
+
+
+
+
+
+
+
+
