@@ -8,7 +8,7 @@ import seaborn as sns
 tips = sns.load_dataset('tips')
 tips.head()
 
-sns.lmplot(x = 'total_bil'', y = 'tip', data = tips)
+sns.lmplot(x = 'total_bill', y = 'tip', data = tips)
 # It's a scatter plot, with a linear fit on top of it
 
 

@@ -13,7 +13,7 @@ We can list different unique values of flowers
 iris['species'].unique()
 
 
-# Simpe Pair Plot
+# Simple Pair Plot
 #pair plot is automated join plot for the entire set
 
 sns.pairplot(iris)
@@ -47,7 +47,7 @@ g = sns.FacetGrid(data = tips, col = 'time', row = 'smoker')
 # instead of numbers, put in column names for data frame.
 Empty 4 grids shown
 
-Let's fill the griod
+Let's fill the grid
 g.map(sns.distplot, 'total_bill')
 
 I am mapping a plot type, and separating results based on column and row, based on column names
@@ -60,7 +60,7 @@ Results from Example:
        [Graph Here]                  [Graph Here]
 
 
-# Rows and Columsn are What you want to separate by.
+# Rows and Columns are What you want to separate by.
 
 What if I tried 'total_bill' for scatter plot? Add the additional arguments. (For scatter plot, we are comparing 'total_bill' VS 'tip' amount, so we need 2 parameters (aka 2 column names) for this one. )
 g.map(plt.scatter, 'total_bill', 'tip')
