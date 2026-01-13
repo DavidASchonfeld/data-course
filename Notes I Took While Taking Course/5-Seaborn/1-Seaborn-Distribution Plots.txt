@@ -11,11 +11,21 @@ tips = sns.load_dataset('tips')  # this dataset is loaded into a dataFrame
 
 
 ##########################################
-Distribution Plot/Histogram
+Distribution Plot (Ex: Histogram)
 ##########################################
 
+Distribution Plot: Sorting data into different bins based on a variable's value, using .count() to find how many data points fit into each bin
+Sometimes bins are = to each unique value from a variable
+Sometimes bins have ranges that data could fit into it. For example: Bin A (holds x = 1-5), Bin B (holds x = 6-10) etc. How the bins are decided is automatically set, but you can change it. #bins parameter: chooses how many bins it uses
+
+Historgram is the most common form of showing Distribution Plots
+When You use sns.distplot, it, by default, creates a historgram plot (Uses histplot function from Matplotlib under the hoods)
 
 sns.distplot(tips['total_bill'], kde = 'False', bins = 30)  #Passing in 1 column
+NOTE: distplot will be deprecated. Instead, use displot or histplot (Quote Explanation from Error when I try to use this deprecated version:
+"Please adapt your code to use either `displot` (a figure-level function with
+similar flexibility) or `histplot` (an axes-level function for histograms)"
+)
 # kde
 ### kde = 'True' (default value). There is a curved line around the bars/points of the graph
 ### kde = 'False' That curved line described above is not drawn.
@@ -32,7 +42,7 @@ Joint Plot
 ##########################################
 
 You can combine 2 different distribution plot
-and a kind variable that's les us choose how we want to compare those 2 different distributions
+and a kind variable that's lets us choose how we want to compare those 2 different distributions
 
 sns.jointplot(x = 'total_bill', y = 'tip', data = tips, kind = 'hex')
 # x and y each have to be a column
@@ -60,13 +70,13 @@ sns.pairplot(tips)
 # Shows lots of joinplots, in a large table of jointplots, comparing each numerical column in the input dataframe with another numeral column in the input dataframe
 
 # hue
-### Optional PArameter
+### Optional Parameter
 ### Put in Column Name with NonNumbers (aka Category, like "Male" or "Female"
 ------ will color parts of data for each category
 
 # palette
 ### Optional Parameter
---- You can choose which color scheem to use
+--- You can choose which color scheme to use
 
 
 ##########################################

@@ -14,11 +14,11 @@ sns.lmplot(x = 'total_bill', y = 'tip', data = tips)
 
 Let's add hue to separate based on category.
 
-sns.lmplot(x = 'total_bil'', y = 'tip', data = tips, hue = 'sex')
+sns.lmplot(x = 'total_bill', y = 'tip', data = tips, hue = 'sex')
 Since we are setting hue = gender,
 now there are 2 overlaping scatterplots/linear fits (one per sex), color-coded by the category (sex)
 
-We use the same paraemters as matplotlib
+We use the same parameters as matplotlib
 For example:
 markers = []
 # Since we are using hue (to show 2 different plots based on the different values in 1 category column), we need to pass in a list of marker shapes instead of just one marker shape
