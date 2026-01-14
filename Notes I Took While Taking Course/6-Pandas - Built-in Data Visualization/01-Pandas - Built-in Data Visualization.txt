@@ -17,6 +17,8 @@ df1.head()
 df2 = pd.read_csv('df2')
 df2.head()
 
+
+
 df1['A'].hist()
 # automatically creates a histrogram (calls matplotlib under the hood)
 # NOTE: If we import seaborn in the top of the document, the automatically created historgram will use seaborn instead (remember, seaborn does use matplotlib) to make a better-looking histogram.
@@ -24,7 +26,9 @@ df1['A'].hist()
 df1['A'].hist(bins = 30)
 # We can add parameters etc.
 
-
+################################################
+Histogram Plot
+################################################
 
 df1['A'].plot(kind = 'hist', bins = 30)
 # Course Resources includes some lists of which parameters/parameter values work in this function
