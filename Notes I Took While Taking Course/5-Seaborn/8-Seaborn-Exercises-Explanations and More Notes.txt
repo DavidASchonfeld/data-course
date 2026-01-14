@@ -1,0 +1,36 @@
+Seaborn - Exercises
+
+
+-- For this worksheet, the lecturer is not asking for perfect/exact matches, such as the exact same color scheme, setting x/y limits for the graph etc.
+
+-- 
+sns.swarmplot(x = 'class', y = 'age', data = titanic, palette = 'Set2')
+/Users/David/miniconda3/envs/navigator/lib/python3.11/site-packages/seaborn/categorical.py:3399: UserWarning: 15.5% of the points cannot be placed; you may want to decrease the size of the markers or use stripplot.
+  warnings.warn(msg, UserWarning)
+This error means that since Swarmplot wants to place all of the points spaced out so you can see them all individually (without them overlapping), and the points are too close in value to each other, the Swarmplot couldn't put down all of the points onto the graph.
+Either you choose to change your settings to ignore the warnings like this:
+import warnings
+warnings.filterwarnings('ignore')
+
+Or you try to shrink marker (aka point) size so all of the points fit:
+
+
+
+sns.heatmap(data = titanic.corr(), cmap = 'coolwarm')
+ValueError: could not convert string to float: 'male'
+This error is because titanic has a column with the string options 'male' or 'female' and they are not numerical. To skip that column (and only use .corr() (and .mean too)) for columns with numerical values, use this:
+.corr(numeric_only = True)
+The Full Command for the Heatmap
+sns.heatmap(data = titanic.corr(numeric_only = True), cmap = 'coolwarm')
+
+Palette VS CMap
+-- Heatmap uses cmap (not palette) because cmap is a continuous gradient of colors, and palette is mostly just an array/list of certain colors.
+
+
+For a FacetGrid (like a lmlplot from Matplotlib)
+
+When we just want 2 grids, side-by-side
+graph_last = sns.FacetGrid(col = 'sex', data = titanic)
+graph_last.map(plt.hist, 'age')  # Notice here. We call the column directly. 'age'. NOT titanic['age']
+plt.show()
+

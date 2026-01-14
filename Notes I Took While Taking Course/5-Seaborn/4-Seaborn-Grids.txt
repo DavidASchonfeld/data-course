@@ -13,7 +13,10 @@ We can list different unique values of flowers
 iris['species'].unique()
 
 
+
+###########################################
 # Simple Pair Plot
+###########################################
 #pair plot is automated join plot for the entire set
 
 sns.pairplot(iris)
@@ -38,6 +41,10 @@ g.map_upper(plt.scatter)  # above the diagonal line (where the chart compares ea
 g.map_lower(sns.kdeplot)
 # Noting: He's passing in the plot functions themselves
 
+
+###########################################
+FacetGrid
+###########################################
 
 FacetGrid:
 

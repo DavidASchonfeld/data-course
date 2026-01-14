@@ -8,7 +8,7 @@ tips.head()
 import numpy as np
 
 ####################################################
-Bar Plot
+Bar Plot (and Count Plot and Box Plot)
 ####################################################
 sns.barplot()
 
