@@ -1,0 +1,226 @@
+Pandas - Built-in Data Visualization
+
+
+import numpy as np
+import seaborn as sns
+import pandas as pd
+
+%matplotlib inline  # See visuliazations in the Jupyter Notebook
+
+Note: df1, df2, and df3 are external CSV  documents that we are importing (they were provided with the course notes/resources)
+
+df1 = pd.read_csv('df1', index_col = 0)
+df1.head()
+# Here, the index is a time series (starting with January 1, 2000 and the next January 2, 2000 etc., incrementing by 1 day etc.)
+
+
+df2 = pd.read_csv('df2')
+df2.head()
+
+df1['A'].hist()
+# automatically creates a histrogram (calls matplotlib under the hood)
+# NOTE: If we import seaborn in the top of the document, the automatically created historgram will use seaborn instead (remember, seaborn does use matplotlib) to make a better-looking histogram.
+
+df1['A'].hist(bins = 30)
+# We can add parameters etc.
+
+
+
+df1['A'].plot(kind = 'hist', bins = 30)
+# Course Resources includes some lists of which parameters/parameter values work in this function
+
+Another way to do something similar
+df1['A'].plot.hist()
+
+
+Let's go through different plot types and check them out
+
+df2.head()
+As we see, this dataframe is a bunch of numbers between 0 and 1
+
+
+################################################
+Area Plot
+################################################
+
+df2.plot.area()
+# Creates an area plot
+aka lot a line plot that plots multiple lines on a graph, but fills the empty spaces between the lines with color.
+
+Lecturer phrases this as: "same as the line plot, but underneath is filled with color"
+
+# Let's add some transparency
+df2.plot.area(alpha = 0.4)
+
+
+
+################################################
+Bar Plot
+################################################
+
+df2.plot.bar()
+# Automatically creates a bar plot, uses the index as a category
+# Since this makes each index into its own section for separate bars (each section is split into categories, a b c d). Since df2 only has values 0-9 (since it only has 10 data rows), it works. If it had so so many different indexes, this would not be a good idea.
+
+
+df2.plot.bar(stacked = True)
+This "stacked = True" combines each different category (a, b, c, d) in each index on the x value (0 through 9) and stacks them on top of each other, so each x value has only 1 bar, but it is made of different parts (each color-coded to represent a, b, c, d) so the bars themselves are easier to read, though harder to compare each (a, b, c, d) in each (0 through 9) section
+
+
+################################################
+Histogram Plot (Again)
+################################################
+
+df1['A'].plot.hist(bins = 50)
+# Lecturer uses 
+
+
+################################################
+Line Plot
+################################################
+df1.plot.line(x = df1.index, y = 'B')
+# You have to specify x and y
+# He uses "df1.index" since there is NO column name for the index column.
+
+
+# Let's add more arguments (You can add matplotlib arguments into here.)
+### Let's make it wider and skinnier lines
+df1.plot.line(x = df1.index, y = 'B', figsize = (12, 3), linewidth = 1)
+
+
+################################################
+Scatter Plot
+################################################
+
+df1.plot.scatter(x = 'A', y = 'B')
+# You have to specify x and y
+# Here, we are passing in column names
+
+# Let's set the color based on a different column
+
+##### Using Color (Depending on 3rd Column Value)
+df1.plot.scatter(x = 'A', y = 'B', c = 'C')
+# "c" means Color
+# color for each dot will be based on column C's value for that point/data row
+
+# It, by default, shows a scatter plot, with the dots in grayscale and in addition, shows gradient labeled to show that whiter points are closed to -2.4 and darker/blacker points are closer to 3.2 and more midpoints are labeled on that gradient too.
+
+Let's pass in "cmap" (aka color map, a color gradient) to use rather than the default grayscale.
+
+df1.plot.scatter(x = 'A', y = 'B', c = 'C', cmap = 'coolwarm')
+
+##### Using Size (Depending on 3rd Column Value)
+# Instead of using color for column C, let's use size.
+df1.plot.scatter(x = 'A', y = 'B', s = df1['C'])
+# You have to pass in the column itself.
+# Since the values in our dataset for column C are so small (they are around -0.1 and 0.1 ish), let's multiple the values by 100 so the graph better displays the variance
+"Shows how large the C value is relative to each other" Lecturer says.
+
+
+df1.plot.scatter(x = 'A', y = 'B', s = df1['C']*100)
+
+
+# Lecturer has a Jupyter Notebook with all of this information, included with the course resources, that we can use as a reference.
+
+
+
+################################################
+Box Plot
+################################################
+
+df2.plot.box()
+Takes 1 column as the category (for the x-axis) In this case [categories: a, b, c, d]
+
+Let's create a new dataFrame based on random information
+
+df = pd.DataFrame(np.random.randn(1000, 2), columns= ['a', 'b'])
+df.head()
+This new dataFrame is "bivariant", meaning it has 2 variables
+
+This is the new dataFrame:
+        a         b
+0   1.546204  -1.356245
+1  -0.652438   1.382349
+2   1.924799  -0.244626
+3   0.645588   0.053722
+4   1.074083   0.436081
+
+
+################################################
+Hex Plot (Scatter Plot but with Hexagons)
+################################################
+
+df.plot.hexbin(x = 'a', y = 'b')
+
+Let's change the binsize to be larger (each bin is a hexagon, including the empty spaces)
+df.plot.hexbin(x = 'a', y = 'b', gridsize = 25)
+
+Let's use a colormap
+df.plot.hexbin(x = 'a', y = 'b', gridsize = 25, cmap = 'coolwarm')
+
+
+################################################
+Kernel Density Estimation (KDE) plots. 
+################################################
+# Kernel Density Estimation (KDE) plots
+# Kernel Density Estimation plots
+# KDE Plots
+
+If we want, not ust a historgram but a kernel density estimation, 
+
+df2['a'].plot.kde()
+It will plot the KDE line (NOT the histogram).
+
+
+df2['a'].plot.density()  <-Does the SAME thing as .kde()
+
+To clarify, the following 2 commands do the exact same thing:
+df2['a'].plot.kde()
+df2['a'].plot.density()
+
+And you don't need to do it specifically off of one column. You can have all of the columns graphed onto the same plot
+Ex:
+df2.plot.density()
+
+
+
+
+################################################
+Final Notes
+################################################
+
+If you want to customize the graphs/plots, you should use Seaborn or Matplotlib.
+
+This lecture, about using Panda-built-in commands to show graphs (you still need to import Matplotlib, and if you want nicer graphs, import Seaborn too) in an easy low effort way.
+If you want to customize the graphs/plots, like in more complicated ways, then you should directly use Seaborn or Matplotlib instead.
+
+This course: Lecturer will just use this concept for very quikcly creating line plots and histogram plots. He recommended using Seaborn directly for Box plots or Bar plots and other advanced plots.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
