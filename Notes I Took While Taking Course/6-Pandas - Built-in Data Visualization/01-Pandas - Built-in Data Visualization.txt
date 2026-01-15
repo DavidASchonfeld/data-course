@@ -5,6 +5,12 @@ import numpy as np
 import seaborn as sns
 import pandas as pd
 
+
+#### NOTE: I needed to install scipy to get KDE graphs to work.
+pip install scipy
+conda install scipy
+##
+
 %matplotlib inline  # See visuliazations in the Jupyter Notebook
 
 Note: df1, df2, and df3 are external CSV  documents that we are importing (they were provided with the course notes/resources)
