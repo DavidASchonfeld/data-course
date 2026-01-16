@@ -196,7 +196,7 @@ df2.plot.density()
 
 
 ################################################
-Final Notes
+More Notees
 ################################################
 
 If you want to customize the graphs/plots, you should use Seaborn or Matplotlib.
@@ -207,12 +207,49 @@ If you want to customize the graphs/plots, like in more complicated ways, then y
 This course: Lecturer will just use this concept for very quikcly creating line plots and histogram plots. He recommended using Seaborn directly for Box plots or Bar plots and other advanced plots.
 
 
+################################################
+Some New Information/Review from the Worksheet:
+################################################
+
+##### Using X-Limit and Y-Limit:
+graph_1 = df3.plot.scatter(x = 'a', y = 'b', color = 'red', s= 40, figsize = (10, 2), edgecolor = 'black')
+graph_1.set_xlim(-0.2, 1.2)
+graph_1.set_ylim(-0.2, 1.2)
+plt.show()
 
 
 
+##### To Use GGPlot Styling
+
+plt.style.use('ggplot')  # Yes, this worksheet on purpose required me to find this answer on my own via the internet, not from a previous lecture. (Though I could have asked in the Q&A section if I had needed it.)
+df3['a'].plot(kind = 'hist', color = 'red', edgecolor = 'black', bins = 25, alpha = 0.2)
+plt.show()
 
 
 
+##### Line-Style for 
+df3['d'].plot.kde(color = 'red', linestyle = 'dotted', linewidth = 4)
+plt.show()
+
+
+##### Create an area plot of all the columns for just the rows up to 30. (hint: use .ix).
+(.ix is a way to use slicing)
+
+df3.head(30).plot.area(alpha = 0.4)
+plt.show()
+
+# Another option, from the lecture:
+# df3.ix[0:30].plot.area(alpha = 0.4)
+# .ix is a type of slicing
+
+
+## Showing Legend To the Right (and Outside of) the Graph:
+# Yes, you had to google for the answer since the naswer is not in the lecture notes
+
+figure = plt.figure()
+df3.head(30).plot.area(alpha = 0.4)
+plt.legend(loc = 'center left', bbox_to_anchor = (1.0, 0.5))
+plt.show()  # You need this line and the "figure = plt.figure()" line at the beginning of this cell if I want to run this code outside of Jupyter Notebook
 
 
 
