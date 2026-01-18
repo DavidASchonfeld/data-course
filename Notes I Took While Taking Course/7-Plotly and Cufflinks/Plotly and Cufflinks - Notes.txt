@@ -1,4 +1,63 @@
 Plotly and Cufflinks 
 
 
+####################################
+Intro
+####################################
+
+
+Plotly: interactive visualization library, open-source
+Cufflinks: connects plotly with Pandas
+
+
+To Install:
+pip install plotly
+pip install cufflinks
+
+(During the time the lecturer recorded this lecture, you could not use "conda install plotly" and "conda install cufflinks" at this time. But now (January 2026) you can.)
+
+Note: Plotly is free. You only pay money if you want plotly to host your data etc., but you can host it on your own server, or run it locally if you like for free (or pay for your own 3rd party hosting etc.)
+
+
+# This class will focus on using Plotly with Pandas (and Cufflinks connects those together).
+
+
+### Update Notes:
+Since this lecture was posted, new errors/features for Plotly and Cufflinks were put out, so there is a note in the lecture area with notes/required additional code needed to get Plotly and Cufflinks to work.
+I will need to add this also here, and also in the worksheet.
+He also notes: If you run into problems, search the course Q&A section before posting new questions in the Q&A section.'
+
+
+pip install chart-studio
+
+In the Python File:
+import chart_studio.plotly as py
+
+
+#####################################################
+Main Lecture for Plotly and Cufflinks (Main Lecture)
+#####################################################
+
+
+import pandas as pd
+import numpy as np
+
+from plotly import __version__
+
+print(__version__)
+
+Note: I will use Jupyter Notebook for taking notes for this, to ensure that when I write the notes form the lecturer, I immediately correcet it with more up-to-date information.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
