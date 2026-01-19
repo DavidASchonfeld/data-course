@@ -1,0 +1,22 @@
+Introduction to Geographical Plotting
+Choropleth - Intro
+
+Geographical plotting
+-- usually challenging becuase of varioius formats thae data can come in
+-- uusally use a specific tool based on the data source
+
+For this course,
+We will use Plotly for plotting
+Matplotlib also has a basemap extension
+
+
+######
+Choropleth Maps - Part 1
+
+
+Choropleth Maps
+--
+
+import p[lotly.plotly as py
+import plotly.graph_objs as go
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot

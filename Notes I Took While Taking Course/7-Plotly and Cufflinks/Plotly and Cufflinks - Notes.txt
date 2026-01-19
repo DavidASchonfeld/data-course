@@ -51,6 +51,15 @@ Note: I will use Jupyter Notebook for taking notes for this, to ensure that when
 
 
 
+TODO: According to my research (I will post/message the lecturer):
+my_dataFrame_1.plot(kind = 'scatter', x = 'A', y = 'B', s = 20)  #<- "s": makes smaller circles, # = for area, Matplotlib
+VS
+my_dataFrame_1.plot(kind = 'scatter', x = 'A', y = 'B').update_traces(marker=dict(size = 20)), #<- size: makes larger circles, # refers to diameter, Plotly
+Is this true? Which should I use (or should I use a different method for accessing "size" and similar parameters?) If this lecture is about teaching me to use Plotly, 
+
+
+
+
 
 
 
