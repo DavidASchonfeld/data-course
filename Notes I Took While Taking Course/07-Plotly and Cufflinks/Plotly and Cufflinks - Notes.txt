@@ -55,15 +55,137 @@ TODO: According to my research (I will post/message the lecturer):
 my_dataFrame_1.plot(kind = 'scatter', x = 'A', y = 'B', s = 20)  #<- "s": makes smaller circles, # = for area, Matplotlib
 VS
 my_dataFrame_1.plot(kind = 'scatter', x = 'A', y = 'B').update_traces(marker=dict(size = 20)), #<- size: makes larger circles, # refers to diameter, Plotly
-Is this true? Which should I use (or should I use a different method for accessing "size" and similar parameters?) If this lecture is about teaching me to use Plotly, 
+Is this true? Which should I use (or should I use a different method for accessing "size" and similar parameters?) If this lecture is about teaching me to use Plotly, which method should I use/how should I learn from this?
+
+
+-----
+Question for Lecturer/Teaching Assistants:
+
+Subject: Plotly Parameters
+
+
+While following the lecture, even with recommended changes via the document, I could not get iplot to work.
+
+So I made the .plot() method use Plotly (got information from other Q&A from this lecture/course) (Code is included at the bottom of this post)
+
+Because of this, I had trouble implementing certain parameters that the lecturer used.
+
+I have 2 questions about this:
+Note: My Full Setup Code (list of imports, mode I turned on etc.) is at the bottom of this post)
+Note: I have researched my questions extensively and am continuing to try to solve this on my own as well.
+
+1. Which Method (Below) is Best/Ideal? Is what I wrote (one still uses Matplotlib, one uses Plotly) accurate? Which should I use (or should I use a different method for accessing "size" and similar parameters?) I also see "Plotly Express" being mentioned. How does that factor in? If this lecture is about teaching me to use Plotly, which method should I use/how should I learn from this? 
+
+Note: Both of these methods work and create interactive graphs, though 1 draws smaller markers than the other.
+my_dataFrame_1.plot(kind = 'scatter', x = 'A', y = 'B', s = 20)  #<- "s": makes smaller circles, # = for area, (Matplotlib)
+VS
+my_dataFrame_1.plot(kind = 'scatter', x = 'A', y = 'B').update_traces(marker=dict(size = 20)), #<- size: makes larger circles, # refers to diameter, (Plotly)
+Is this true? 
+
+2. I cannot get the parameter   mode = "marker"   to work at all. Since my scatter graph, by default, show the markers, this is not necessary. But I am still wondering how to access/set that parameter, and how it fits into how to use Plotly the right way.
 
 
 
 
+###
+Code for Context 
+##
+
+# Setup From Lecture (I added the comments)
+
+import pandas as pd
+import numpy as np
+from plotly import __version__
+import cufflinks as cf
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+init_notebook_mode(connected = True)  # Connects JavaScript to the Notebook
+cf.go_offline()  # Allows us to use Cufflinks offline
+##
+# Extra Setup from Q&A Section in this lecture (since I couldn't get iplot() to work
+
+import chart_studio.plotly as py
+pd.options.plotting.backend = 'plotly'
+from chart_studio.plotly import plot
+##
+
+# Plot Method:
+my_dataFrame_1.plot()  # Plots with Plotly
+# Now it's a mouseover interactive
+
+my_dataFrame_1.plot(kind = 'scatter', x = 'A', y = 'B', s = 20)
+OR
+my_dataFrame_1.plot(kind = 'scatter', x = 'A', y = 'B').update_traces(marker=dict(size = 20))
+
+
+
+-----
+
+ANOTHER Question for Lecturer/Teaching Assistants:
+
+Subject Line: Iplot: Works Inconsistently?
+Subject: Iplot doesn't work in Plotly/Cufflinks section, but works in Choropleth/Geographical Mapping Section
+
+I appreciate this course and I am learning a fair amouint and am excited to learn more.
+I am confused about the iplot method, and when it is supposed to work/not work and whether parts are deprecated or not.
+(Note: I have googled this and am still confused, and I will continue to try to find the answer.)
+
+When following the Plotly/Cufflinks lecture/section, I was unable to get the iplot method to work.
+However, when I was in the following section focusing on Choropleth/Geographical Mapping, I was able to use iplot.
+Does iplot only work in certain modes? Is iplot deprecated? And is Cufflinks deprecated (via this Q&A from this course: https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/learn/lecture/5733376#questions/23887269) Or perhaps I am using iplot incorrectly? How can I use iplot correctly the right way?
 
 
 
 
+Plotly/Cufflinks Section: How I tried (and failed) to use iplot
+
+import pandas as pd
+import numpy as np
+from plotly import __version__
+import cufflinks as cf
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+init_notebook_mode(connected = True)  # Connects JavaScript to the Notebook
+cf.go_offline()  # Allows us to use Cufflinks offline
+# DATA
+my_dataFrame_1 = pd.DataFrame(np.random.randn(100, 4), columns = 'A B C D'.split())
+my_dataFrame_1.head()
+
+my_dataFrame_1.iplot()  # <- Does Not Work
+
+
+Choropleth/Geographical Mapping Section (This "iplot" works): 
+
+import pandas as pd
+
+# import plotly.plotly as py <-Deprecated line
+import plotly.graph_objs as go  #<-This is especially needed for Plotly graphs
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+
+#############
+## I included this because according to some Q&As in the Plotly section, I need this in more recent versions to get Plotly to work.
+
+import chart_studio.plotly as py
+pd.options.plotting.backend = 'plotly'
+from chart_studio.plotly import plot
+
+
+init_notebook_mode(connected = True)  # Enable to see things in JupyterNotebook
+
+##3 USA Map
+
+data = dict(type = 'choropleth',
+           locations = ['AZ','CA','NY'],
+           locationmode = 'USA-states',
+            # locationmode: We're choosing one of the preset strings that plotly gives as an option
+            colorscale = 'Greens',
+            text = ['Arizona', 'Cali', 'New York'],  # text appears when hovering over
+            z  = [1.0, 2.0, 3.0], # Values that colormap will use for the color gradient
+            colorbar = {'title':'Colorbar Title'}
+           )
+
+layout = dict(geo  = {'scope':'usa'})
+
+choromap = go.Figure(data = [data], layout = layout)
+iplot(choromap)  # <- This works in creating an interactive map.
 
 
 
