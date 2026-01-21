@@ -123,11 +123,11 @@ Merge
 
 Why use Join VS Merge?
 -- Join and Merge have extremely similar methods behind-the-scenes.
--- Choosing 1 or the other is more based on those 2 different "wrapper" methods having different parameters and their paramter methods being better handled to suit different types of situations
+-- Choosing 1 or the other is more based on those 2 different "wrapper" methods having different parameters and their parameter methods being better handled to suit different types of situations
 -- While it's better to use:
 ---- Join when: Index: Use for combining based on the Index
 ---- Merge when: Column or Row: Use for combining based on column or row
--- technically, you could use Join and Merge interchangeably for most things, thought you have to be carefulto avoid errors if you use them for unintended uses. (For example, for 1 of them, you have ot write the name of an input list twice, and maybe you'll mispell one of those names, making it a highrer chance you make a mistake. etc. And to use merge as a join subsittue, you need to write extra logic to ensure that the index is not messed up.
+-- Technically, you could use Join and Merge interchangeably for most things, thought you have to be careful to avoid errors if you use them for unintended uses. (For example, for 1 of them, you have to write the name of an input list twice, and maybe you'll mispell one of those names, making it a higher chance that you make a mistake. etc. And to use merge as a join substitute, you need to write extra logic to ensure that the index is not messed up.
 
 
 

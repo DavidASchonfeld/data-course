@@ -72,7 +72,10 @@ One more index example: setting the index.
 newIndex = 'CA NY WY OR CO'.split()  # Remember, .split() splits into an array of strings via the empty space
 Now new_index is: ['CA', 'NY', 'WY', 'OR', 'CO']
 
+# New Column
+#New Column, #NewColumn, #Adding a Column, #AddingAColumn, #Adding a New Column, #AddingANewColumn
 
+my_dataFrame['New Column'] = new_index  <-This is an example of creating a brand new column
 my_dataFrame['States'] = new_index  # <- This will create a new column onto the existing dataFrame with column name "States", and the values = to the new_index array I had created above.
 
 Now, to set that column to become the index for that column.
